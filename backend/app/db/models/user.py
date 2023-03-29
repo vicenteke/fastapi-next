@@ -6,10 +6,10 @@ from sqlalchemy import (
 from .base_model import BaseModel
 
 
-class User(BaseModel):
+class Users(BaseModel):
     """ Base table model from which actual tables must derive, so they include
         default fields.
     """
-    __tablename__ = 'user'
+    __tablename__ = 'users'
 
     name = Column(String, nullable=False, index=True)

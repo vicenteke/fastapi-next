@@ -22,6 +22,11 @@ class BaseModel(Base):
     updated_on = Column(DateTime, server_default=func.now(), onupdate=func.now())
     rm_timestamp = Column(Integer, server_default='0')
 
+    @classmethod
+    @property
+    def __tablename__(cls):
+        return cls.__tablename__.lower()
+
     @hybrid_property
     def deleted(self):
         return self.rm_timestamp != 0

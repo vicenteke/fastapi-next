@@ -8,9 +8,7 @@ from sqlalchemy.orm import sessionmaker
 load_dotenv('/home/vicente/Desktop/projects/fastapi-next/.env')
 
 SQLALCHEMY_DATABASE_URL = os.environ['FN_PSQL_URI']
-engine = create_engine(
-    SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
-)
+engine = create_engine(SQLALCHEMY_DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
