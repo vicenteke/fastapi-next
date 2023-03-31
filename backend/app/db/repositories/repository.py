@@ -46,9 +46,6 @@ class Repository:
         self.db_session = db_session
         self.model = model
 
-    def __del__(self):
-        self.commit()
-
     def __enter__(self):
         return self
 
