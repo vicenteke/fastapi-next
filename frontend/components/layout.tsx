@@ -49,11 +49,11 @@ export default function Layout({
           </div>
           <div id="navbarmenu" className="navbar-menu">
             <div className="navbar-start">
-              <Link href="/">
-                <a className="navbar-item">Home</a>
+              <Link href="/" className="navbar-item">
+                Home
               </Link>
-              <Link href="/secondPage">
-                <a className="navbar-item">Second page</a>
+              <Link href="/secondPage" className="navbar-item">
+                Second page
               </Link>
             </div>
             <div className="navbar-end">
