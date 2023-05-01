@@ -1,0 +1,43 @@
+$primary: #efd126
+  
+@import "../node_modules/bulma/sass/utilities/_all.sass"
+@import "../node_modules/bulma/sass/base/_all.sass"
+@import "../node_modules/bulma/sass/elements/box.sass"
+@import "../node_modules/bulma/sass/elements/button.sass"
+@import "../node_modules/bulma/sass/elements/container.sass"
+@import "../node_modules/bulma/sass/elements/content.sass"
+@import "../node_modules/bulma/sass/elements/title.sass"
+@import "../node_modules/bulma/sass/form/_all.sass"
+@import "../node_modules/bulma/sass/components/message.sass"
+@import "../node_modules/bulma/sass/components/navbar.sass"
+@import "../node_modules/bulma/sass/layout/hero.sass"
+@import "../node_modules/bulma/sass/layout/section.sass"
+@import "../node_modules/bulma/sass/layout/footer.sass"
+@import "../node_modules/bulma/sass/helpers/typography.sass"
+@import "../node_modules/bulma/sass/helpers/spacing.sass"
+@import "../node_modules/bulma/sass/components/card.sass"
+@import "../node_modules/bulma/sass/components/modal.sass"
+
+button
+  &:not(.modal-close)
+    @extend .button
+
+@mixin scrollbars($size, $foreground-color, $background-color: mix($foreground-color, white,  50%))
+  // For Google Chrome
+  &::-webkit-scrollbar
+    width:  $size
+    height: $size
+
+  &::-webkit-scrollbar-thumb
+    background: $foreground-color
+
+  &::-webkit-scrollbar-track
+    background: $background-color
+
+  // For Internet Explorer
+  &
+    scrollbar-face-color: $foreground-color
+    scrollbar-track-color: $background-color
+
+body
+  @include scrollbars(10px, $info, transparent)
