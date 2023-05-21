@@ -1,4 +1,5 @@
 from sqlalchemy import (
+    BigInteger,
     Column,
     DateTime,
     Integer
@@ -17,7 +18,7 @@ class BaseModel(Base):
     """
     __abstract__ = True
 
-    pk = Column(Integer, primary_key=True, index=True)
+    pk = Column(BigInteger, primary_key=True, index=True)
     created_on = Column(DateTime, nullable=False, server_default=func.now())
     updated_on = Column(DateTime, server_default=func.now(), onupdate=func.now())
     rm_timestamp = Column(Integer, server_default='0')

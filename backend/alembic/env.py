@@ -30,6 +30,46 @@ target_metadata = models.database.Base.metadata
 config.set_main_option('sqlalchemy.url', os.environ['FN_PSQL_URI'])
 
 
+def custom_column_types_rendering():
+    import re
+    import alembic
+    from app.db.types.enum_column import EnumColumn
+    from alembic.autogenerate.render import (
+        _user_defined_render,
+        _sqlalchemy_autogenerate_prefix,
+        _user_autogenerate_prefix
+    )
+
+    def _repr_type(type_, autogen_context):
+        rendered = _user_defined_render("type", type_, autogen_context)
+        if rendered is not False:
+            return rendered
+
+        if isinstance(type_, EnumColumn):
+            tp_prefix = _user_autogenerate_prefix(autogen_context, type_.values)
+            tp = "%s%s" % (tp_prefix, type_.values.__name__)
+            prefix = _user_autogenerate_prefix(autogen_context, type_)
+            tmp = "%s%r" % (prefix, type_,)
+            tmp = tmp.split('(')
+            return tmp[0] + '(' + ("%s," % (tp,)) + tmp[1]
+
+        mod = type(type_).__module__
+        imports = autogen_context.imports
+        if mod.startswith("sqlalchemy.dialects"):
+            dname = re.match(r"sqlalchemy\.dialects\.(\w+)", mod).group(1)
+            if imports is not None:
+                imports.add("from sqlalchemy.dialects import %s" % dname)
+            return "%s.%r" % (dname, type_)
+        elif mod.startswith("sqlalchemy."):
+            prefix = _sqlalchemy_autogenerate_prefix(autogen_context)
+            return "%s%r" % (prefix, type_)
+        else:
+            prefix = _user_autogenerate_prefix(autogen_context, type_)
+            return "%s%r" % (prefix, type_)
+
+    alembic.autogenerate.render._repr_type = _repr_type
+
+
 def run_migrations_offline() -> None:
     """Run migrations in 'offline' mode.
 
@@ -42,6 +82,7 @@ def run_migrations_offline() -> None:
     script output.
 
     """
+    custom_column_types_rendering()
     url = config.get_main_option("sqlalchemy.url")
     context.configure(
         url=url,
@@ -61,6 +102,7 @@ def run_migrations_online() -> None:
     and associate a connection with the context.
 
     """
+    custom_column_types_rendering()
     connectable = engine_from_config(
         config.get_section(config.config_ini_section, {}),
         prefix="sqlalchemy.",
