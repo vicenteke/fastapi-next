@@ -1,10 +1,11 @@
 from pydantic import BaseModel
 
 
-class Token(BaseModel):
+class TokenSchema(BaseModel):
     access_token: str
     token_type: str
 
 
-class TokenData(BaseModel):
+class TokenDataSchema(BaseModel):
     username: str | None = None
+    expiration_timestamp: int | None = None
