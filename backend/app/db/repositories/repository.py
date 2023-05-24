@@ -197,3 +197,20 @@ class Repository:
         purged_kwargs = kwargs
 
         return filtered_kwargs, purged_kwargs
+
+    def get_instance(self, ref, str_column='', **kwargs):
+        """
+        Returns an instance based on a ref. If instance is an integer, use pk
+        as reference. If instance is str, use str_column. Otherwise returns
+        None.
+        """
+
+        if isinstance(ref, self.model):
+            return ref
+        if isinstance(ref, int):
+            return self.one_or_none(pk=ref, **kwargs)
+        if isinstance(ref, str):
+            kwargs[str_column] = ref
+            return self.one_or_none(**kwargs)
+
+        return None

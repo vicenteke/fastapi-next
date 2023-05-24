@@ -18,10 +18,10 @@ async def crete_token(
         form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
         db_session: Session = Depends(get_db)
 ):
-    with UserRepository(db_session) as user_repo:
-        user = user_repo.one_or_none(login=form_data.username)
-        if user is None:
-            raise AuthenticationRepository.credentials_exception
+    user_repo = UserRepository(db_session)
+    user = user_repo.one_or_none(login=form_data.username)
+    if user is None:
+        raise AuthenticationRepository.credentials_exception
 
     auth_repo = AuthenticationRepository(db_session)
     res = auth_repo.verify_password(form_data.password, user.password)
@@ -31,6 +31,7 @@ async def crete_token(
     login_settings = LoginSettingsRepository(db_session).one()
     token_data = {
         "sub": user.login,
+        "scopes": ' '.join(user_repo.permissions(user))
     }
     access_token = auth_repo.create_access_token(
         token_data,
