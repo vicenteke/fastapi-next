@@ -30,7 +30,8 @@ class FixtureRunner:
         try:
             for fixture in self.fixtures:
                 # Check if all fixtures are BaseFixtures
-                if not isinstance(fixture, BaseFixture):
+                if not issubclass(fixture, BaseFixture)\
+                        and not isinstance(fixture, BaseFixture):
                     raise CustomException(
                         f"{fixture} is not a BaseFixture instance.")
 
@@ -42,7 +43,7 @@ class FixtureRunner:
                 if self._has_pending_required_fixtures(fixture):
                     failures_left -= 1
                     fixtures_to_run.append(fixture)
-                else:
+                elif fixture.name not in self._applied_fixtures:
                     self._apply_fixture(fixture)
 
             if failures_left <= 0:

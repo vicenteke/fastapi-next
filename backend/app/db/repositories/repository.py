@@ -124,7 +124,9 @@ class Repository:
 
     def create(self, **kwargs):
         """ Creates a new entry """
-        return self.model(**kwargs)
+        obj = self.model(**kwargs)
+        self.db_session.add(obj)
+        return obj
 
     def update(self, **kwargs):
         """ Updates an entry if it exists and returns it, otherwise

@@ -11,12 +11,6 @@ class BaseFixture:
         self.db_session = db_session
         self._repo = self.repo(db_session) if self.repo else None
 
-    @classmethod
-    @property
-    def name(self):
-        """Unique name that identifies this fixture"""
-        raise NotImplementedError()
-
     @property
     def repo(self):
         """The repository for this fixture"""
@@ -63,6 +57,12 @@ class BaseFixture:
             )
         """
         raise NotImplementedError()
+
+    @classmethod
+    @property
+    def name(cls):
+        """Unique name that identifies this fixture"""
+        return cls.__name__
 
     @property
     def update_prefix(self):
