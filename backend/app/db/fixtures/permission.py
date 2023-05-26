@@ -1,5 +1,5 @@
 from .base_fixture import BaseFixture
-from ..constants.permissions import PermissionsEnum
+from ..constants.permission import PermissionEnum
 from ..repositories.permission import PermissionRepository
 
 
@@ -18,5 +18,5 @@ class PermissionFixture(BaseFixture):
             {
                 'name': permission.name,
                 'description': permission.value,
-            } for permission in PermissionsEnum
+            } for permission in PermissionEnum
         ]

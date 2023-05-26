@@ -37,10 +37,9 @@ class AuthenticationRepository:
         return encoded_jwt
 
     @classmethod
-    @property
-    def credentials_exception(cls):
+    def credentials_exception(cls, msg=None, authenticate_value="Bearer"):
         return HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Could not validate credentials",
-            headers={"WWW-Authenticate": "Bearer"},
+            detail=msg or "Could not validate credentials",
+            headers={"WWW-Authenticate": authenticate_value},
         )

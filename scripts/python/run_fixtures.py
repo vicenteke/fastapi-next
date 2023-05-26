@@ -1,15 +1,5 @@
-from backend.app.db.fixtures.fixture_runner import FixtureRunner
-from backend.app.db.fixtures.permission import PermissionFixture
 from backend.app.db.models.database import SessionLocal
-
-
-class AllFixures(FixtureRunner):
-    @property
-    def fixtures(self):
-        return [
-            PermissionFixture,
-        ]
-
+from backend.app.db.fixtures.all import AllFixures
 
 if __name__ == '__main__':
     db_session = SessionLocal()

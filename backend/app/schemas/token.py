@@ -8,4 +8,4 @@ class TokenSchema(BaseModel):
 
 class TokenDataSchema(BaseModel):
     username: str | None = None
-    expiration_timestamp: int | None = None
+    scopes: list[str] = []

@@ -13,11 +13,12 @@ class UserRepository(Repository):
         super().__init__(db_session, User)
 
     def permissions(self, user, **kwargs):
+        """Returns a list of permission names. Used in scopes"""
         user = self.get_instance(user, **kwargs)
         if not user:
             return []
 
-        res = self.db_session.query(Permission.name)\
+        query = self.db_session.query(Permission.name)\
             .join(
                 RolePermission,
                 RolePermission.permission_pk == Permission.pk
@@ -33,6 +34,6 @@ class UserRepository(Repository):
                 UserRole.deleted == false(),
                 User.deleted == false(),
                 User.pk == user.pk
-            )
+            ).all()
 
-        return list(res) if res else []
+        return [val[0] for val in query]

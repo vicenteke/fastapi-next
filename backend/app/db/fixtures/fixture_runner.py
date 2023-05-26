@@ -18,6 +18,7 @@ class FixtureRunner:
 
     def _apply_fixture(self, fixture):
         fixture(self.db_session).apply()
+        self.db_session.commit()
         self._applied_fixtures.append(fixture.name)
 
     def _has_pending_required_fixtures(self, fixture):

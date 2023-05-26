@@ -1,6 +1,8 @@
+from enum import unique
 from ..types.enum_class import EnumClass
 
 
+@unique
 class UserStatusEnum(EnumClass):
     """
     Lists possible user status.

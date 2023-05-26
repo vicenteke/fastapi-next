@@ -21,17 +21,17 @@ async def crete_token(
     user_repo = UserRepository(db_session)
     user = user_repo.one_or_none(login=form_data.username)
     if user is None:
-        raise AuthenticationRepository.credentials_exception
+        raise AuthenticationRepository.credentials_exception()
 
     auth_repo = AuthenticationRepository(db_session)
     res = auth_repo.verify_password(form_data.password, user.password)
     if not res:
-        raise AuthenticationRepository.credentials_exception
+        raise AuthenticationRepository.credentials_exception()
 
     login_settings = LoginSettingsRepository(db_session).one()
     token_data = {
         "sub": user.login,
-        "scopes": ' '.join(user_repo.permissions(user))
+        "scopes": user_repo.permissions(user)
     }
     access_token = auth_repo.create_access_token(
         token_data,
