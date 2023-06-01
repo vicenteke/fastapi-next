@@ -4,6 +4,7 @@ from sqlalchemy.exc import IntegrityError
 from copy import copy
 
 from ..models.database import Base
+from ..models.user import User
 
 
 class Repository:
@@ -42,9 +43,10 @@ class Repository:
     """
     UPDATE_PREFIX = 'old__'     # Used on update() and create_or_update()
 
-    def __init__(self, db_session: Session, model: Base):
+    def __init__(self, db_session: Session, model: Base, user: User = None):
         self.db_session = db_session
         self.model = model
+        self.user = user
 
     def __enter__(self):
         return self

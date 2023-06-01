@@ -9,8 +9,8 @@ from ..models.permission import Permission
 
 
 class UserRepository(Repository):
-    def __init__(self, db_session: Session):
-        super().__init__(db_session, User)
+    def __init__(self, db_session: Session, user=None):
+        super().__init__(db_session, User, user)
 
     def permissions(self, user, **kwargs):
         """Returns a list of permission names. Used in scopes"""

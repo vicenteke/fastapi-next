@@ -5,8 +5,8 @@ from ..models.permission import Permission
 
 
 class PermissionRepository(Repository):
-    def __init__(self, db_session: Session):
-        super().__init__(db_session, Permission)
+    def __init__(self, db_session: Session, user=None):
+        super().__init__(db_session, Permission, user)
 
     def get_name_and_pk(self, **kwargs):
         """

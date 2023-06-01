@@ -5,5 +5,5 @@ from ..models.role_permission import RolePermission
 
 
 class RolePermissionRepository(Repository):
-    def __init__(self, db_session: Session):
-        super().__init__(db_session, RolePermission)
+    def __init__(self, db_session: Session, user=None):
+        super().__init__(db_session, RolePermission, user)

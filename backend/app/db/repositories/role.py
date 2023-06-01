@@ -5,5 +5,5 @@ from ..models.role import Role
 
 
 class RoleRepository(Repository):
-    def __init__(self, db_session: Session):
-        super().__init__(db_session, Role)
+    def __init__(self, db_session: Session, user=None):
+        super().__init__(db_session, Role, user)

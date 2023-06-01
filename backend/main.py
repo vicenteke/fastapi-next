@@ -1,14 +1,15 @@
-from typing import Union
 from fastapi import FastAPI
 
-from .app.routers.authentication import router as authentication_router
-from .app.routers.user import router as user_router
+from .app.routers import (
+    authentication,
+    user,
+)
 
 app = FastAPI()
 
-app.include_router(authentication_router)
+app.include_router(authentication.router)
 app.include_router(
-    user_router,
+    user.router,
     prefix="/users",
     tags=["users"]
 )
