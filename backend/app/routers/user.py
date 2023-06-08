@@ -5,9 +5,11 @@ from typing import Annotated
 from ..dependencies.database import get_db
 from ..dependencies.authentication import get_user
 from ..schemas.default import DefaultSchema
-from ..schemas.user import UserSchema, TestUserSchema
+from ..schemas.user import UserSchema
 from ..db.constants.permission import PermissionEnum
 from ..db.repositories.user import UserRepository
+
+from ..routers.default_router import DefaultRouter
 
 router = APIRouter()
 

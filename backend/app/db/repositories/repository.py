@@ -117,7 +117,11 @@ class Repository:
         entries = self.all(**kwargs)
         for entry in entries:
             entry.deleted = True
-        return entries
+
+        if len(entries) == 1:
+            return entries[0]
+
+        return entries or None
 
     def hard_delete(self, **kwargs):
         """ CAUTION: this method will exclude your data permanently from the DB
@@ -163,6 +167,9 @@ class Repository:
         for entry in entries:
             for key, value in purged_kwargs.items():
                 setattr(entry, key, value)
+
+        if len(entries) == 1:
+            return entries[0]
 
         return entries
 
