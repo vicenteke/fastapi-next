@@ -6,7 +6,6 @@ type Props = React.PropsWithChildren<{
 
 
 function Modal({ children, id="" }: Props) {
-
     return (
       <div id={id} className="modal">
         <div className="modal-background"></div>
