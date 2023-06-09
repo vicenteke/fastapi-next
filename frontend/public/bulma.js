@@ -1,10 +1,10 @@
 /* Adding JS required to make BulmaCSS functional */
 if (typeof document !== typeof undefined) {
-  console.log('Loading BulmaJS...')
 
-  // NAVBAR -----------------------------------------------------------------
-  document.addEventListener('DOMContentLoaded', () => {
-  
+  const loadBulma = () => {
+    console.log('Loading BulmaJS...');
+
+    // NAVBAR -----------------------------------------------------------------
     // Get all "navbar-burger" elements
     const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
   
@@ -21,10 +21,8 @@ if (typeof document !== typeof undefined) {
         $target.classList.toggle('is-active');
       });
     });
-  });
-  
-  // MODAL -----------------------------------------------------------------
-  document.addEventListener('DOMContentLoaded', () => {
+
+    // MODAL -----------------------------------------------------------------
     // Functions to open and close a modal
     function openModal($el) {
       $el.classList.add('is-active');
@@ -67,5 +65,10 @@ if (typeof document !== typeof undefined) {
         closeAllModals();
       }
     });
-  });  
+  };
+
+  if (document.readyState !== 'loading')
+    loadBulma();
+  else
+    document.addEventListener('DOMContentLoaded', () => loadBulma());
 }
