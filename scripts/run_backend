@@ -1,0 +1,5 @@
+#!/bin/bash
+CURRENT_PATH=$(pwd)
+echo "";
+# trap 'echo [backend] caught signal!; kill $(jobs -p); wait;' SIGINT SIGTERM
+$CURRENT_PATH/venv/bin/python -m uvicorn backend.main:app --reload;

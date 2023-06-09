@@ -1,0 +1,5 @@
+#!/bin/bash
+CURRENT_PATH=$(pwd)
+# trap 'echo [frontend] caught signal!; kill $(jobs -p); wait;' SIGINT SIGTERM
+cd $CURRENT_PATH/frontend;
+npm run dev;

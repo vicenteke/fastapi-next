@@ -1,3 +1,29 @@
 #!/bin/bash
 CURRENT_PATH=$(pwd)
-$CURRENT_PATH/venv/bin/python -m uvicorn backend.main:app --reload
+RUN_BACKEND=2
+RUN_FRONTEND=3
+
+trap 'echo caught signal!; kill $(jobs -p); wait;' SIGINT SIGTERM
+
+while getopts :bf flag
+do
+    case "${flag}" in
+        b) RUN_BACKEND=1
+                    ;;
+        f) RUN_FRONTEND=1
+                    ;;
+    esac
+done
+if [ "${RUN_BACKEND}" == "${RUN_FRONTEND}" ]
+then
+    bash $CURRENT_PATH/scripts/run_backend &
+    bash $CURRENT_PATH/scripts/run_frontend &
+
+elif [ "${RUN_BACKEND}" == 1 ]
+then
+    bash $CURRENT_PATH/scripts/run_backend &
+
+elif [ "${RUN_FRONTEND}" == 1 ]
+then
+    bash $CURRENT_PATH/scripts/run_frontend &
+fi
