@@ -29,9 +29,10 @@ async def crete_token(
         raise AuthenticationRepository.credentials_exception()
 
     login_settings = LoginSettingsRepository(db_session).one()
+    scopes = user_repo.permissions(user)
     token_data = {
         "sub": user.login,
-        "scopes": user_repo.permissions(user)
+        "scopes": scopes
     }
     access_token = auth_repo.create_access_token(
         token_data,
@@ -40,5 +41,6 @@ async def crete_token(
 
     return {
         "access_token": access_token,
-        "token_type": "bearer"
+        "token_type": "bearer",
+        "scopes": scopes
     }

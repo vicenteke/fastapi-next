@@ -1,20 +1,30 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import Button from "./Button";
 import { setToken } from "@/lib/token";
 import fetchServer from "@/lib/fetch.js"
 
 
-export default function LoginForm() {
+interface Props {
+    redirect?: boolean
+}
+
+
+export default function LoginForm({ redirect=false }) {
     const loginRoute = '/token';
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
+    const router = useRouter();
 
     const onSuccess = (token: object) => {
         setToken(token);
         setLoading(false);
+        if (redirect) {
+            router.back();
+        }
     }
 
     const onSubmit = (event: React.MouseEvent<HTMLElement>) => {
@@ -32,7 +42,10 @@ export default function LoginForm() {
                 contentType: "application/x-www-form-urlencoded",
                 onSuccess: onSuccess,
                 onLoading: () => setLoading(true),
-                onError: () => setLoading(false),
+                onError: (error) => {
+                    setLoading(false);
+                    console.log('error:', error);
+                },
             }
         );
     }

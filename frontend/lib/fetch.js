@@ -1,4 +1,3 @@
-
 import { getToken } from './token.js';
 
 /* Description: method used to fetch the server
@@ -19,8 +18,7 @@ export default async function fetchServer(
         onError=function(...params) {},
     }
 ) {
-    const route = url;
-    // const route = `${process.env.NEXT_PUBLIC_SERVER_URL}${url}`;
+    const route = `/api${url}`;
     const getAuthHeader = () => {
         token = getToken();
         if (token)
@@ -49,17 +47,16 @@ export default async function fetchServer(
     try {
         if (onLoading)
             onLoading();
-        console.log('>>>>>>>>>>>>>>>>', requestInit);
         return await fetch(route, requestInit)
-            .then((response) => response.json())
             .then((response) => {
-                if (response.ok) {
-                    if (onSuccess)
-                        onSuccess(response);
-                } else {
-                    if (onError)
-                        onError(response);
-                }
+                if (!response.ok)
+                    onError(response);
+                else
+                    return response.json().then((response) => {
+                        if (onSuccess) {
+                            onSuccess(response);
+                        }
+                    });
             })
             .catch(
                 (error) => {

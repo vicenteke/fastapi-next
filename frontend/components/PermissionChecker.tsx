@@ -1,13 +1,13 @@
 "use client";
 
 import React from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { getToken } from "@/lib/token.js";
 
 
 type Props = React.PropsWithChildren<{
     permissions: Array<string>,
-    at_least_one?: boolean,
+    atLeastOne?: boolean,
     redirect?: boolean,
     to?: string,
 }>;
@@ -20,7 +20,7 @@ type Props = React.PropsWithChildren<{
  *
  * Props:
  * - permissions: array of permissions (must match the values in token.scopes)
- * - at_least_one: if used, will grant access if at least one permission is met
+ * - atLeastOne: if used, will grant access if at least one permission is met
  * - redirect: whether to redirect to another page or not. If it has no
  * children, it is forced to be true
  * - to: the page to redirect if permissions are not met
@@ -28,21 +28,19 @@ type Props = React.PropsWithChildren<{
 function PermissionChecker({
     children,
     permissions,
-    at_least_one=false,
+    atLeastOne=false,
     redirect=false,
     to="/login"
 }: Props) {
-
-    const router = useRouter();
-    const token = getToken();
     let authorized = false;
+    const token = getToken();
 
     if (!children) {
         redirect = true;
     }
 
     if (token) {
-        if (at_least_one) 
+        if (atLeastOne)
             authorized = permissions.some(p => token.scopes.includes(p));
         else
             authorized = permissions.every(p => token.scopes.includes(p));
@@ -54,11 +52,11 @@ function PermissionChecker({
         </>
     }
 
-    if (redirect) {
+    if (redirect && typeof window !== 'undefined') {
+        const router = useRouter();
         router.push(to);
     }
     return <></>
-    
 }
 
 export default PermissionChecker;
