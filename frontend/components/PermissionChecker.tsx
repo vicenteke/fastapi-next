@@ -37,11 +37,14 @@ function PermissionChecker({
     const [token, setToken] = useState({access_token: '', scopes: Array()});
     const router = useRouter();
 
+    if (!children) {
+        redirect = true;
+    }
+
     useEffect(() => {
-        setToken(getToken());
-        setTokenFlag(true);
-        if (!children) {
-            redirect = true;
+        if (token && !token.access_token) {
+            setToken(getToken());
+            setTokenFlag(true);
         }
         if (tokenFlag && token) {
             if (atLeastOne)
@@ -61,7 +64,6 @@ function PermissionChecker({
             {children}
         </>
     }
-
     return <></>
 }
 
