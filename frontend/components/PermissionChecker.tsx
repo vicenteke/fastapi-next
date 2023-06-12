@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { getToken } from "@/lib/token.js";
 
@@ -32,19 +32,29 @@ function PermissionChecker({
     redirect=false,
     to="/login"
 }: Props) {
-    let authorized = false;
-    const token = getToken();
+    const [authorized, setAuthorized] = useState<boolean | null>(null);
+    const [tokenFlag, setTokenFlag] = useState(false);
+    const [token, setToken] = useState({access_token: '', scopes: Array()});
+    const router = useRouter();
 
-    if (!children) {
-        redirect = true;
-    }
-
-    if (token) {
-        if (atLeastOne)
-            authorized = permissions.some(p => token.scopes.includes(p));
-        else
-            authorized = permissions.every(p => token.scopes.includes(p));
-    }
+    useEffect(() => {
+        setToken(getToken());
+        setTokenFlag(true);
+        if (!children) {
+            redirect = true;
+        }
+        if (tokenFlag && token) {
+            if (atLeastOne)
+                setAuthorized(permissions.some(p => token.scopes.includes(p)));
+            else
+                setAuthorized(permissions.every(p => token.scopes.includes(p)));
+        } else if (token === null) {
+            setAuthorized(false);
+        }
+        if (tokenFlag && authorized === false && redirect) {
+            router.push(to);
+        }
+    }, [tokenFlag, authorized]);
 
     if (authorized && children) {
         return <>
@@ -52,10 +62,6 @@ function PermissionChecker({
         </>
     }
 
-    if (redirect && typeof window !== 'undefined') {
-        const router = useRouter();
-        router.push(to);
-    }
     return <></>
 }
 
