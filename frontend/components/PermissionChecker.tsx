@@ -9,7 +9,8 @@ type Props = React.PropsWithChildren<{
     permissions: Array<string>,
     atLeastOne?: boolean,
     redirect?: boolean,
-    to?: string,
+    to?: string | null,
+    loginRoute?: string,
 }>;
 
 
@@ -30,7 +31,8 @@ function PermissionChecker({
     permissions,
     atLeastOne=false,
     redirect=false,
-    to="/login"
+    loginRoute="/login",
+    to=null
 }: Props) {
     const [authorized, setAuthorized] = useState<boolean | null>(null);
     const [tokenFlag, setTokenFlag] = useState(false);
@@ -40,6 +42,8 @@ function PermissionChecker({
     if (!children) {
         redirect = true;
     }
+
+    const redirectRoute = to === null ? loginRoute : `${loginRoute}?redirect=${to}`;
 
     useEffect(() => {
         if (token && !token.access_token) {
@@ -55,7 +59,7 @@ function PermissionChecker({
             setAuthorized(false);
         }
         if (tokenFlag && authorized === false && redirect) {
-            router.push(to);
+            router.push(redirectRoute);
         }
     }, [tokenFlag, authorized]);
 

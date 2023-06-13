@@ -1,13 +1,12 @@
-import Head from 'next/head';
-
 import Modal from '@/components/Modal';
 import ModalButton from '@/components/ModalButton';
-import Navbar from '@/components/Navbar';
+import PermissionChecker from '@/components/PermissionChecker';
 
 
 export default function Home() {
   return (
     <>
+      <PermissionChecker permissions={['IS_ROOT_USER']} redirect to='/about'>
       <section className="section">
           <h1 className="title">
               Hello World
@@ -43,6 +42,7 @@ adipiscing elit lorem ipsum dolor. <strong>Pellentesque risus mi</strong>, tempu
           </footer>
         </div>
       </Modal>
+      </PermissionChecker>
     </>
   )
 }

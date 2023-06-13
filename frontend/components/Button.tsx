@@ -5,7 +5,7 @@ import { ButtonProps } from '@/constants/types'
 function Button({
   children,
   className="",
-  color=undefined,
+  color="primary",
   size=undefined,
   variant=undefined,
   isLight=false,
