@@ -11,7 +11,7 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-br">
-      <body>
+      <body className='has-navbar-fixed-top'>
         {children}
         <Script src='/bulma.js'/>
       </body>

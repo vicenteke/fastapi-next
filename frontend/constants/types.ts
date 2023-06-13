@@ -17,3 +17,12 @@ export interface ButtonProps extends React.ComponentPropsWithoutRef<"button"> {
   isLoading?: boolean,
   isStatic?: boolean,
 };
+
+
+export interface NavbarProps extends React.ComponentPropsWithoutRef<"nav"> {
+  color?: BulmaColors | BulmaShades | "transparent" | string,
+  isFixedTop?: boolean,
+  isFixedBottom?: boolean,
+  isSpaced?: boolean,
+  hasShadow?: boolean,
+};

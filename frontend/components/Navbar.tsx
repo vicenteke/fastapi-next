@@ -1,39 +1,35 @@
-import Link from "next/link";
-import MenuLinks from "./MenuLinks";
+import NavbarLinks from "./NavbarLinks";
+import { NavbarProps } from "@/constants/types";
+import { leftMenu, rightMenu } from "./Menu";
 
 
-function Navbar() {
-  const leftMenu = [
-    {
-      html: 'Home',
-      href: '/'
-    },
-    {
-      html: 'More',
-      children: [
-        {
-          html: 'About',
-          href: '/about'
-        },
-        {
-          html: 'Contact',
-          href: '/contact'
-        },
-        {},
-        {
-          html: 'Report an issue',
-          href: '/issue'
-        }
-      ]
-    },
-  ];
-
-  const rightMenu = [{
-    html: <Link className='button is-light' href='/login'>Login</Link>
-  }];
+/* Description: creates a navbar based on BulmaJS.
+ *
+ * Props:
+ * - color: Bulma navbar variant;
+ * - isFixedTop: whether it's fixed on top or not;
+ * - isFixedBottom: whether it's fixed on bottom or not;
+ * - isSpaced: Bulma class that adds some padding;
+ * - hasShadow: Bulma class that adds a shadow to the navbar;
+ */
+function Navbar({
+  className,
+  color="primary",
+  isFixedTop=true,
+  isFixedBottom=false,
+  isSpaced=false,
+  hasShadow=false,
+  ...props
+}: NavbarProps) {
+  let classNames = [className, "navbar"];
+  if (typeof color === 'string') classNames.push("is-" + color)
+  if (isFixedTop) classNames.push("is-fixed-top")
+  else if (isFixedBottom) classNames.push("is-fixed-bottom")
+  if (isSpaced) classNames.push("is-spaced")
+  if (hasShadow) classNames.push("has-shadow")
 
   return (
-    <nav className="navbar is-primary" role="navigation" aria-label="main navigation">
+    <nav className={classNames.join(" ")} role="navigation" aria-label="main navigation" {...props}>
       <div className="navbar-brand">
         <a className="navbar-item" href="https://bulma.io">
           <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28" />
@@ -49,11 +45,11 @@ function Navbar() {
       {/* Desktop menu */}
       <div id="navbarBasicExample" className="navbar-menu">
         <div className="navbar-start">
-          <MenuLinks items={leftMenu}/>
+          <NavbarLinks items={leftMenu} isTransparent={color === 'transparent'}/>
         </div>
     
         <div className="navbar-end">
-          <MenuLinks items={rightMenu}/>
+          <NavbarLinks items={rightMenu} isTransparent={color === 'transparent'}/>
         </div>
       </div>
     </nav>)

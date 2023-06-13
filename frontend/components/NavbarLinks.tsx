@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { usePathname } from 'next/navigation'
 
-interface ItemProps {
+export interface ItemProps {
     html?: string | React.ReactNode,
     href?: string,
     children?: Array<{} | {html: string | React.ReactNode, href: string}>
@@ -12,13 +12,15 @@ interface ItemProps {
 
 type Props = React.PropsWithChildren<{
     items: Array<ItemProps>,
+    isTransparent?: boolean
 }>;
 
 
 /* Description: creates a list of divs to be used in navbar, mixing NextJS
  * routing with BulmaJS styles.
  * Props:
- * - items: array of items to be included in the menu.
+ * - items: array of items to be included in the menu;
+ * - isTransparent: applies Bulma's is-boxed to dropdowns;
  * 
  * Example:
  * const leftMenu = [
@@ -50,8 +52,9 @@ type Props = React.PropsWithChildren<{
  *   html: <Link className='button is-light' href='/login'>Login</Link>
  * }];
  */
-function MenuLinks({ items }: Props) {
+function NavbarLinks({ items, isTransparent }: Props) {
     const pathname = usePathname();
+    const dropdownClasses = isTransparent ? "navbar-dropdown is-boxed" : "navbar-dropdown";
 
     return (<>
         {items.map((item, index) => {
@@ -62,7 +65,7 @@ function MenuLinks({ items }: Props) {
                 {item.children &&
                     <div className="navbar-item has-dropdown is-hoverable">
                         <div className="navbar-link">{item.html || <></>}</div>
-                        <div className="navbar-dropdown">
+                        <div className={dropdownClasses}>
                         {item.children.map((child, childIndex) => {
                             if (!child.href)
                                 return <hr key={childIndex} className="navbar-divider" />
@@ -87,4 +90,4 @@ function MenuLinks({ items }: Props) {
     </>)
 }
 
-export default MenuLinks;
+export default NavbarLinks;
