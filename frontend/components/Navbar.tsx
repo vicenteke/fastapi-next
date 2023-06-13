@@ -1,6 +1,38 @@
-function Navbar() {
+import Link from "next/link";
+import MenuLinks from "./MenuLinks";
 
-    return (
+
+function Navbar() {
+  const leftMenu = [
+    {
+      html: 'Home',
+      href: '/'
+    },
+    {
+      html: 'More',
+      children: [
+        {
+          html: 'About',
+          href: '/about'
+        },
+        {
+          html: 'Contact',
+          href: '/contact'
+        },
+        {},
+        {
+          html: 'Report an issue',
+          href: '/issue'
+        }
+      ]
+    },
+  ];
+
+  const rightMenu = [{
+    html: <Link className='button is-light' href='/login'>Login</Link>
+  }];
+
+  return (
     <nav className="navbar is-primary" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
         <a className="navbar-item" href="https://bulma.io">
@@ -17,48 +49,11 @@ function Navbar() {
       {/* Desktop menu */}
       <div id="navbarBasicExample" className="navbar-menu">
         <div className="navbar-start">
-          <a className="navbar-item">
-            Home
-          </a>
-    
-          <a className="navbar-item">
-            Documentation
-          </a>
-    
-          <div className="navbar-item has-dropdown is-hoverable">
-            <a className="navbar-link">
-              More
-            </a>
-    
-            <div className="navbar-dropdown">
-              <a className="navbar-item">
-                About
-              </a>
-              <a className="navbar-item">
-                Jobs
-              </a>
-              <a className="navbar-item">
-                Contact
-              </a>
-              <hr className="navbar-divider" />
-              <a className="navbar-item">
-                Report an issue
-              </a>
-            </div>
-          </div>
+          <MenuLinks items={leftMenu}/>
         </div>
     
         <div className="navbar-end">
-          <div className="navbar-item">
-            <div className="buttons">
-              <a className="button is-primary">
-                <strong>Sign up</strong>
-              </a>
-              <a className="button is-light">
-                Log in
-              </a>
-            </div>
-          </div>
+          <MenuLinks items={rightMenu}/>
         </div>
       </div>
     </nav>)

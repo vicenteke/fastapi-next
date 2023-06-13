@@ -12,7 +12,7 @@ interface Props {
 }
 
 
-export default function LoginForm({ redirect=false }) {
+export default function LoginForm({ redirect=false }: Props) {
     const loginRoute = '/token';
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
