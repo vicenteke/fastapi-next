@@ -5,8 +5,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Button from "./Button";
 import { setToken } from "@/lib/token";
 import fetchServer from "@/lib/fetch.js";
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faSquareEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 
 interface Props {
     redirect?: boolean
@@ -68,8 +68,7 @@ export default function LoginForm({ redirect=false }: Props) {
                     placeholder="Username"
                 />
                 <span className="icon is-small is-left">
-                    {/* <FontAwesomeIcon icon={faSquareEnvelope} className='icon'/> */}
-                    <i className="fas fa-coffee"></i>
+                    <FontAwesomeIcon icon={faEnvelope}/>
                 </span>
             </p>
         </div>
@@ -83,8 +82,7 @@ export default function LoginForm({ redirect=false }: Props) {
                     placeholder="Password"
                 />
                  <span className="icon is-small is-left">
-                    {/* <FontAwesomeIcon icon={faLock} className='icon is-small is-left'/> */}
-                    <i className="fas fa-lock"></i>
+                    <FontAwesomeIcon icon={faLock}/>
                 </span>
             </p>
         </div>
