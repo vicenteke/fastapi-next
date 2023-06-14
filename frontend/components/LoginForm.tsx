@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import Button from "./Button";
 import { setToken } from "@/lib/token";
 import fetchServer from "@/lib/fetch.js";
@@ -13,12 +13,18 @@ interface Props {
 }
 
 
-export default function LoginForm({ redirect=false }: Props) {
+/* Description: a login form that implements user authentication.
+ * Props:
+ * - redirect: whether to redirect to another page after login or not. It will
+ * go to the previous page or to the one specified in the search param
+ * "redirect". NOTE: it will forcedly reload the entire page, so the
+ * permissions are re-evaluated.
+ */
+export default function LoginForm({ redirect=true }: Props) {
     const loginRoute = '/token';
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
-    const router = useRouter();
     const searchParams = useSearchParams();
     const redirectRoute = searchParams?.get('redirect');
 
@@ -27,9 +33,9 @@ export default function LoginForm({ redirect=false }: Props) {
         setLoading(false);
         if (redirect) {
             if (redirectRoute === null || typeof redirectRoute !== 'string')
-                router.back();
+                history.back();
             else
-                router.push(redirectRoute);
+                window.location.href = redirectRoute;
         }
     }
 

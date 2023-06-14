@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { ButtonProps } from '@/constants/types'
 
 
@@ -8,6 +9,7 @@ function Button({
   color="primary",
   size=undefined,
   variant=undefined,
+  href=undefined,
   isLight=false,
   isResponsive=true,
   isFullWidth=false,
@@ -19,7 +21,7 @@ function Button({
   ...props
 }: ButtonProps) {
 
-  let classNames = [className];
+  let classNames = [className, 'button'];
   if (typeof color === 'string') classNames.push("is-" + color)
   if (typeof size === 'string') classNames.push("is-" + size)
   if (typeof variant === 'string') classNames.push("is-" + variant)
@@ -31,6 +33,14 @@ function Button({
   if (isActive) classNames.push("is-active")
   if (isLoading) classNames.push("is-loading")
   if (isStatic) classNames.push("is-static")
+
+  if (href) {
+    return (
+      <Link className={classNames.join(" ")} href={href}>
+        {children}
+      </Link>
+    )
+  }
 
   return (
     <button className={classNames.join(" ")} {...props}>

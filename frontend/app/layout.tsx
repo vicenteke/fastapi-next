@@ -1,5 +1,6 @@
 import '@/styles/globals.sass';
 import Script from 'next/script';
+import Navbar from '@/components/Navbar';
 
 export const metadata = {
   title: "Vicenteke's Base",
@@ -12,7 +13,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="pt-br">
       <body className='has-navbar-fixed-top'>
-        {children}
+        <Navbar />
+        <br />
+        <main className="content">
+          <div className="container">
+            {children}
+          </div>
+        </main>
         <Script src='/bulma.js'/>
       </body>
     </html>

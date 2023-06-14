@@ -5,6 +5,8 @@
 
 import Link from "next/link";
 import { ItemProps } from "./NavbarLinks";
+import Button from "./Button";
+import LogoutButton from "./LogoutButton";
 
 export const leftMenu: Array<ItemProps> = [
     {
@@ -16,16 +18,16 @@ export const leftMenu: Array<ItemProps> = [
         children: [
             {
                 html: 'About',
-                href: '/about'
+                href: '/'
             },
             {
                 html: 'Contact',
-                href: '/contact'
+                href: '/'
             },
-            {},
+            null,
             {
                 html: 'Report an issue',
-                href: '/issue'
+                href: '/'
             }
         ]
     },
@@ -33,6 +35,23 @@ export const leftMenu: Array<ItemProps> = [
 
 export const rightMenu: Array<ItemProps> = [
     {
-        html: <Link className='button is-light' href='/login'>Login</Link>
+        html: 'Admin',
+        href: '/admin',
+        auth: {
+            permissions: ['IS_ADMIN'],
+        }
+    },
+    {
+        html: <LogoutButton />,
+        auth: {
+            permissions: [],
+        }
+    },
+    {
+        html: <Button variant="inverted" href='/login'>Login</Button>,
+        auth: {
+            permissions: ['IS_ADMIN'],
+            reverse: true,
+        }
     }
 ];

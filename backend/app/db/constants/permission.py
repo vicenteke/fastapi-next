@@ -7,3 +7,4 @@ from .scopes_permissions import ScopesPermissions
 @ScopesPermissions.include
 class PermissionEnum(EnumClass):
     IS_ROOT_USER = "IS_ROOT_USER"
+    IS_ADMIN = "IS_ADMIN"

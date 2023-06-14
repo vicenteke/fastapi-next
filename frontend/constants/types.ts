@@ -8,6 +8,7 @@ export interface ButtonProps extends React.ComponentPropsWithoutRef<"button"> {
   color?: BulmaColors | BulmaShades | "text" | "ghost" | string,
   size?: BulmaSizes,
   variant?: BulmaStyles,
+  href?: string,
   isLight?: boolean,
   isResponsive?: boolean,
   isFullWidth?: boolean,

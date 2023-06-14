@@ -5,9 +5,10 @@ import { useRouter } from "next/navigation";
 import { getToken } from "@/lib/token.js";
 
 
-type Props = React.PropsWithChildren<{
+export type Props = React.PropsWithChildren<{
     permissions: Array<string>,
     atLeastOne?: boolean,
+    reverse?: boolean,
     redirect?: boolean,
     to?: string | null,
     loginRoute?: string,
@@ -22,6 +23,7 @@ type Props = React.PropsWithChildren<{
  * Props:
  * - permissions: array of permissions (must match the values in token.scopes)
  * - atLeastOne: if used, will grant access if at least one permission is met
+ * - reverse: whether to avoid those permissions or to look for them;
  * - redirect: whether to redirect to another page or not. If it has no
  * children, it is forced to be true
  * - to: the page to redirect if permissions are not met
@@ -30,6 +32,7 @@ function PermissionChecker({
     children,
     permissions,
     atLeastOne=false,
+    reverse=false,
     redirect=false,
     loginRoute="/login",
     to=null
@@ -51,10 +54,16 @@ function PermissionChecker({
             setTokenFlag(true);
         }
         if (tokenFlag && token) {
+            let permissionsMatch = false;
             if (atLeastOne)
-                setAuthorized(permissions.some(p => token.scopes.includes(p)));
+                permissionsMatch = permissions.some(p => token.scopes.includes(p));
             else
-                setAuthorized(permissions.every(p => token.scopes.includes(p)));
+                permissionsMatch = permissions.every(p => token.scopes.includes(p));
+
+            if (reverse)
+                permissionsMatch = !permissionsMatch
+
+            setAuthorized(permissionsMatch);
         } else if (token === null) {
             setAuthorized(false);
         }

@@ -16,3 +16,7 @@ export function setToken(token) {
     }
     localStorage.setItem(process.env.NEXT_PUBLIC_TOKEN_NAME, token);
 }
+
+export function deleteToken() {
+    localStorage.removeItem(process.env.NEXT_PUBLIC_TOKEN_NAME);
+}
