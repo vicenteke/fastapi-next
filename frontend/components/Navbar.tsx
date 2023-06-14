@@ -1,3 +1,8 @@
+"use client";
+
+import React, { useEffect } from "react";
+import { bulmaNavbarJS, clearClickEventListeners } from '@/lib/bulma.js'
+
 import NavbarLinks from "./NavbarLinks";
 import { NavbarProps } from "@/constants/types";
 import { leftMenu, rightMenu } from "./Menu";
@@ -6,6 +11,7 @@ import { leftMenu, rightMenu } from "./Menu";
 /* Description: creates a navbar based on BulmaJS.
  *
  * Props:
+ * - id: required HTML id for each navbar;
  * - color: Bulma navbar variant;
  * - isFixedTop: whether it's fixed on top or not;
  * - isFixedBottom: whether it's fixed on bottom or not;
@@ -13,6 +19,7 @@ import { leftMenu, rightMenu } from "./Menu";
  * - hasShadow: Bulma class that adds a shadow to the navbar;
  */
 function Navbar({
+  id,
   className,
   color="primary",
   isFixedTop=true,
@@ -27,15 +34,31 @@ function Navbar({
   else if (isFixedBottom) classNames.push("is-fixed-bottom")
   if (isSpaced) classNames.push("is-spaced")
   if (hasShadow) classNames.push("has-shadow")
+  const burgerId = `${id}-burger`;
+  const targetMenuId = `${id}-burger-target`;
+
+  useEffect(() => {
+    // Adding required JS
+    const listeners = bulmaNavbarJS(burgerId);
+
+    // Clearing event listeners
+    return () => {
+      clearClickEventListeners(listeners);
+    }
+  }, [])
 
   return (
-    <nav className={classNames.join(" ")} role="navigation" aria-label="main navigation" {...props}>
+    <nav className={classNames.join(" ")} id={id} role="navigation"
+      aria-label="main navigation" {...props}
+    >
       <div className="navbar-brand">
         <a className="navbar-item" href="https://bulma.io">
           <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28" />
         </a>
     
-        <a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <a id={burgerId} role="button" className="navbar-burger"
+          aria-label="menu" aria-expanded="false" data-target={targetMenuId}
+        >
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
@@ -43,7 +66,7 @@ function Navbar({
       </div>
     
       {/* Desktop menu */}
-      <div id="navbarBasicExample" className="navbar-menu">
+      <div id={targetMenuId} className="navbar-menu">
         <div className="navbar-start">
           <NavbarLinks items={leftMenu} isTransparent={color === 'transparent'}/>
         </div>

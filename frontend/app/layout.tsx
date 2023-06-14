@@ -13,7 +13,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="pt-br">
       <body className='has-navbar-fixed-top'>
-        <Navbar />
+        <Navbar id='main-navbar'/>
         <br />
         <main className="content">
           <div className="container">

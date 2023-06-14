@@ -21,6 +21,7 @@ export interface ButtonProps extends React.ComponentPropsWithoutRef<"button"> {
 
 
 export interface NavbarProps extends React.ComponentPropsWithoutRef<"nav"> {
+  id: string,
   color?: BulmaColors | BulmaShades | "transparent" | string,
   isFixedTop?: boolean,
   isFixedBottom?: boolean,

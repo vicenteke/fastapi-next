@@ -18,7 +18,7 @@ export const leftMenu: Array<ItemProps> = [
         children: [
             {
                 html: 'About',
-                href: '/'
+                href: '/about'
             },
             {
                 html: 'Contact',
