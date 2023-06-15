@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 
 interface Props {
-    redirect?: boolean
+    redirect?: boolean;
 }
 
 

@@ -1,5 +1,6 @@
 import Modal from '@/components/Modal';
 import ModalButton from '@/components/ModalButton';
+import Alert from '@/components/Alert';
 
 
 export default function Home() {
@@ -15,7 +16,10 @@ export default function Home() {
         <p dangerouslySetInnerHTML={{__html: `Lorem ipsum dolor sit amet, consectetur
 adipiscing elit lorem ipsum dolor. <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus diam, et dictum <a>felis venenatis</a> efficitur.`.repeat(20)}}></p>
         <ModalButton target="MyModal" color="primary">Open Modal!</ModalButton>
-        <Modal id="MyModal">
+        <Alert id='MyModal' type='info' title='Oops...' confirm cancel>
+          I'm an alert!
+        </Alert>
+        {/* <Modal id="MyModal">
           <div className="card">
             <div className="card-content">
               <p className="title">
@@ -38,7 +42,7 @@ adipiscing elit lorem ipsum dolor. <strong>Pellentesque risus mi</strong>, tempu
               </p>
             </footer>
           </div>
-        </Modal>
+        </Modal> */}
       </section>
     </>
   )

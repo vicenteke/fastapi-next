@@ -6,20 +6,20 @@ import { usePathname } from 'next/navigation'
 import PermissionChecker, { Props as AuthProps } from '@/components/PermissionChecker';
 
 export interface ItemProps {
-    html?: string | React.ReactNode,
-    href?: string,
-    auth?: AuthProps,
+    html?: string | React.ReactNode;
+    href?: string;
+    auth?: AuthProps;
     children?: Array<
     null | {
         html: string | React.ReactNode,
         href: string,
         auth?: AuthProps
-    }>
+    }>;
 }
 
 type Props = React.PropsWithChildren<{
-    items: Array<ItemProps>,
-    isTransparent?: boolean,
+    items: Array<ItemProps>;
+    isTransparent?: boolean;
 }>;
 
 

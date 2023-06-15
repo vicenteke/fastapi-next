@@ -6,7 +6,7 @@ import { ButtonProps } from "@/constants/types";
 import Button from "./Button";
 
 interface Props  extends ButtonProps {
-  target: string
+  target: string;
 };
 
 

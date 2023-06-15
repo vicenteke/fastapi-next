@@ -6,12 +6,12 @@ import { getToken } from "@/lib/token.js";
 
 
 export type Props = React.PropsWithChildren<{
-    permissions: Array<string>,
-    atLeastOne?: boolean,
-    reverse?: boolean,
-    redirect?: boolean,
-    to?: string | null,
-    loginRoute?: string,
+    permissions: Array<string>;
+    atLeastOne?: boolean;
+    reverse?: boolean;
+    redirect?: boolean;
+    to?: string | null;
+    loginRoute?: string;
 }>;
 
 
