@@ -25,7 +25,21 @@ type Props = React.PropsWithChildren<{
   icon?: null | AlertTypes | IconDefinition;
 }>;
 
-
+/* Description: Alert components are modals used for feedback and dialogs.
+ * There are default styles, but they can be easily adapted by providing custom
+ * icons, button descriptions, title, content, and so on.
+ * Props:
+ * - id [required]: modal ID required for BulmaJS;
+ * - type: defines which default style to use;
+ * - title: bolder, centered text below the icon;
+ * - confirm: text for the confirm button. If set to true, will use a default
+ *            text;
+ * - cancel: text for the cancel button. If set to true, will use a default
+ *           text;
+ * - onConfirm: optional method to be executed when pressing the confirm button;
+ * - onCancel: optional method to be executed when pressing the cancel button;
+ * - icon: a custom icon can be passed using this prop.
+ */
 function Alert({
   id,
   title,

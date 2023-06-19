@@ -27,7 +27,7 @@ export function bulmaNavbarJS(navbarId){
 
 
 // MODAL ---------------------------------------------------------------------
-// Functions to open and close a modal
+// Functions to manage modals
 export function setModalTitle(modalId, title) {
   let modal = modalId;
   let modalTitle = null;
