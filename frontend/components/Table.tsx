@@ -46,20 +46,6 @@ function Table({
   if (isHoverable) classNames.push('is-hoverable');
   if (isFullwidth) classNames.push('is-fullwidth');
 
-  const bodyData = body === undefined ? [] : body.map((line, lineIndex) => {
-    return (
-    <tr
-      key={lineIndex}
-      className={activeRow && lineIndex === activeRow ? 'is-selected' : ''}
-    >
-      {line.map((item, index) => {
-        if (idColumn && index === idColumn)
-          return <th key={index}>{item}</th>
-        return <td key={index}>{item}</td>
-      })}
-    </tr>)
-  })
-
   return (
   <table className={classNames.join(' ')} {...props}>
     {header &&
