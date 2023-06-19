@@ -28,6 +28,28 @@ export function bulmaNavbarJS(navbarId){
 
 // MODAL ---------------------------------------------------------------------
 // Functions to open and close a modal
+export function setModalTitle(modalId, title) {
+  let modal = modalId;
+  let modalTitle = null;
+  if (typeof modalId === 'string')
+    modalTitle = document.querySelector(`#${modalId} .title`);
+  else
+    modalTitle = modal.querySelector('.title');
+  if (modalTitle)
+    modalTitle.html = title;
+}
+
+export function setModalContent(modalId, content) {
+  let modal = modalId;
+  let modalContent = null;
+  if (typeof modalId === 'string')
+    modalContent = document.querySelector(`#${modalId} .modal-children`);
+  else
+    modalContent = modal.querySelector('.modal-children');
+  if (modalContent)
+    modalContent.innerHTML = content;
+}
+
 export function openModal(modalId) {
   let modal = modalId;
   if (typeof modalId === 'string')

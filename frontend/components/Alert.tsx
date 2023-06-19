@@ -38,7 +38,7 @@ function Alert({
   children,
 }: Props) {
 
-  let iconSymbol: IconDefinition | null = null;
+  let iconSymbol: IconDefinition = faInfoCircle;
 
   // Default values
   if ((!confirm && onConfirm) || confirm === true)
@@ -107,7 +107,7 @@ function Alert({
             </div>
             }
             {title && <p className="title has-text-centered">{title}</p>}
-            {children}
+            <div className='modal-children'>{children}</div>
             <div className='columns is-vcentered mt-4 is-multiline'>
               {cancel &&
                 <div className='column'>

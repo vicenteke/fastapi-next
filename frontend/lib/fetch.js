@@ -1,4 +1,5 @@
 import { getToken } from './token.js';
+import { openModal, setModalTitle, setModalContent } from './bulma.js';
 
 /* Description: method used to fetch the server
  * Parameters:
@@ -16,9 +17,20 @@ export default async function fetchServer(
         onLoading=function(...params) {},
         onSuccess=function(...params) {},
         onError=function(...params) {},
+        useErrorModal=true,
     }
 ) {
+    const errorModalName = 'fetch-server-error-modal';
     const route = `/api${url}`;
+    const onFetchError = (error) => {
+        if (onError)
+            onError(error);
+        if (useErrorModal) {
+            setModalContent(errorModalName, error);
+            openModal(errorModalName);
+        }
+    }
+
     const getAuthHeader = () => {
         token = getToken();
         if (token)
@@ -50,7 +62,7 @@ export default async function fetchServer(
         return await fetch(route, requestInit)
             .then((response) => {
                 if (!response.ok)
-                    onError(response);
+                    onFetchError(response);
                 else
                     return response.json().then((response) => {
                         if (onSuccess) {
@@ -60,12 +72,11 @@ export default async function fetchServer(
             })
             .catch(
                 (error) => {
-                    if (onError)
-                        onError(error);
+                    onFetchError(error);
                 }
             )
     } catch (exception) {
-        if (onError)
-            onError(exception);
+        if (onFetchError)
+            onFetchError(exception);
     }
 }
