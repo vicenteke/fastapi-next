@@ -11,7 +11,7 @@ function Button({
   variant=undefined,
   href=undefined,
   isLight=false,
-  isResponsive=true,
+  isResponsive=false,
   isFullWidth=false,
   isHovered=false,
   isFocused=false,

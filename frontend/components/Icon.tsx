@@ -13,6 +13,7 @@ interface IconProps extends React.ComponentPropsWithoutRef<'span'> {
   bordered?: boolean;
   fixedWidth?: boolean;
   className?: string;
+  iconSize?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 }
 
 
@@ -27,6 +28,7 @@ function Icon({
   fixedWidth,
   className,
   style,
+  iconSize,
   ...props
 }: IconProps) {
 
@@ -35,8 +37,11 @@ function Icon({
   if (typeof color === 'string') classNames.push("has-text-" + color);
   if (typeof size === 'string') {
     classNames.push("is-" + size);
-    // TODO: create specific component for Alert Icons
-    iconClassNames.push(size === 'large' ? 'fa-6x' : size !== 'small' ? 'fa-lg' : '');
+  }
+  if (iconSize) {
+    iconClassNames.push(`fa-${iconSize}x`);
+  } else if (size === 'large') {
+    iconClassNames.push('fa-lg');
   }
   if (typeof animation === 'string') iconClassNames.push("fa-" + animation);
   if (bordered) iconClassNames.push("fa-border");

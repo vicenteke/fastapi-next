@@ -3,6 +3,8 @@
 @import "../node_modules/bulma/bulma.sass"
 
 button
+  white-space: normal !important
+  height: auto !important
   &:not(.modal-close)
     @extend .button
 
@@ -23,8 +25,19 @@ button
     scrollbar-face-color: $foreground-color
     scrollbar-track-color: $background-color
 
-body
-  @include scrollbars(10px, $info, transparent)
+// body
+//   @include scrollbars(10px, $info, transparent)
 
 .icon > *
   width: 100%
+
+.modal
+  padding: 2em
+
+.modal-background
+  position: fixed
+  top: 0
+  left: 0
+
+.modal-close
+  background: rgba(10, 10, 10, 0.5)

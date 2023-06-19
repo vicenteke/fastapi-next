@@ -8,11 +8,11 @@ import {
   faCheckCircle,
   faTriangleExclamation,
   faInfoCircle,
-  faExclamation,
-  faExclamationCircle,
 } from '@fortawesome/free-solid-svg-icons';
 import Button from './Button';
 import Icon from './Icon';
+import styles from "@/styles/Alert.module.sass"
+
 
 type Props = React.PropsWithChildren<{
   id: string;
@@ -38,7 +38,7 @@ function Alert({
   children,
 }: Props) {
 
-  let iconSymbol: IconDefinition = null;
+  let iconSymbol: IconDefinition | null = null;
 
   // Default values
   if ((!confirm && onConfirm) || confirm === true)
@@ -89,21 +89,26 @@ function Alert({
   }
 
   return (
-    <div id={id} className="modal">
+    <div id={id} className={`modal ${styles.modal}`}>
       <div className="modal-background"></div>
-      <div className="modal-content">
+      <div className={`modal-content ${styles.modalContent}`}>
         <div className="card">
           <div className="card-content">
             {icon &&
-            <div className='columns is-centered is-vcentered'>
+            <div className='columns is-centered is-vcentered my-2'>
               <div className='column is-5 level'>
-                <Icon icon={iconSymbol} color={icon} size='large' className='level-item'/>
+                <Icon
+                  icon={iconSymbol}
+                  color={icon}
+                  size='large'
+                  className={`level-item ${styles.icon}`}
+                  iconSize={6}/>
               </div>
             </div>
             }
-            {title && <p className="title">{title}</p>}
+            {title && <p className="title has-text-centered">{title}</p>}
             {children}
-            <div className='columns is-vcentered mt-1'>
+            <div className='columns is-vcentered mt-4 is-multiline'>
               {cancel &&
                 <div className='column'>
                   <Button color='normal' onClick={handleConfirm} isFullWidth>
