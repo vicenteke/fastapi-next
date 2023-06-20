@@ -42,7 +42,6 @@ export default function Home() {
           body={tableBody}
           activeRow={2}
           idColumn={0}
-          isFullwidth={false}
         />
         <Pagination totalPages={10} activePage={activePage} previous next onNavigate={setActivePage}/>
       </PermissionChecker>

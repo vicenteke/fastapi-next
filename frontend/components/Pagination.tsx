@@ -3,7 +3,7 @@ import React from "react";
 interface Props extends React.ComponentPropsWithoutRef<'nav'> {
   totalPages: number
   activePage?: number
-  listOffset?: number
+  maxListSize?: number
   previous?: React.ReactNode | string | boolean
   next?: React.ReactNode | string | boolean
   ariaLabel?: string
@@ -17,8 +17,7 @@ interface Props extends React.ComponentPropsWithoutRef<'nav'> {
  * Props (also includes NextImage props):
  * - totalPages: total number of pages;
  * - activePage: current page;
- * - listOffset: limit of items to display offsetting from active page
- * (e.g. 2 before and 2 after it);
+ * - maxListSize: limit of items to display;
  * - previous: text to display on 'previous' button if set to true it will use
  * a default value;
  * - next: text to display on 'next' button if set to true it will use a
@@ -33,7 +32,7 @@ function Pagination({
   totalPages,
   size,
   activePage=0,
-  listOffset=2,
+  maxListSize=5,
   previous=true,
   next=true,
   isRounded=false,
@@ -42,12 +41,13 @@ function Pagination({
   onNavigate,
   ...props
 }: Props) {
-  let classNames = [className, 'pagination'];
+  let classNames = [className, 'pagination', 'is-centered'];
   if (isRounded) classNames.push('is-rounded');
   if (size) classNames.push(`is-${size}`);
 
   if (next === true) next = 'Next';
   if (previous === true) previous = 'Previous';
+  const halfListSize = Math.floor(maxListSize / 2);
 
   const handleClick = (index: number): void => {
     if (index < 0 || index > totalPages - 1)
@@ -57,7 +57,6 @@ function Pagination({
   }
 
   const ellipsis = <span className="pagination-ellipsis">&hellip;</span>;
-
   const createItem = (item: number) => {
     return (
       <a
@@ -71,16 +70,41 @@ function Pagination({
   }
 
   let itemsToDisplay = [];
-  if (activePage - listOffset > 0) itemsToDisplay.push(ellipsis);
-  for (let i = activePage - listOffset ; i <= activePage + listOffset ; i++) {
-    if (i < 0 || i > totalPages - 1)
-      continue
-    itemsToDisplay.push(createItem(i));
+  let count = 0;
+  let currentItem = activePage - halfListSize;
+  if (activePage + halfListSize >= totalPages) {
+    // If it's too close to the end, start earlier
+    currentItem = activePage - halfListSize - (halfListSize + activePage + 1 - totalPages);
   }
-  if (activePage + listOffset < totalPages - 1) itemsToDisplay.push(ellipsis);
+  if (currentItem < 0) {
+    // If it's too close to the beginning, start later
+    currentItem = 0;
+  }
+  if (currentItem > 0) {
+    currentItem++;
+    count++;
+    itemsToDisplay.push(ellipsis);
+  }
+
+  while (count < maxListSize && currentItem < totalPages) {
+    itemsToDisplay.push(createItem(currentItem));
+    currentItem++;
+    count++;
+  }
+  if (currentItem < totalPages) {
+    itemsToDisplay.pop();
+    itemsToDisplay.push(ellipsis);
+  }
 
   return (
     <nav className={classNames.join(' ')} role={role} aria-label={ariaLabel} {...props}>
+      <ul className="pagination-list">
+        <li>
+          {itemsToDisplay.map((item, index) =>
+            <React.Fragment key={index}>{item}</React.Fragment>)
+          }
+        </li>
+      </ul>
       {previous &&
         <a
           className="pagination-previous"
@@ -93,13 +117,6 @@ function Pagination({
           onClick={() => handleClick(activePage + 1)}>{next}
         </a>
       }
-      <ul className="pagination-list">
-        <li>
-          {itemsToDisplay.map((item, index) =>
-            <React.Fragment key={index}>{item}</React.Fragment>)
-          }
-        </li>
-      </ul>
     </nav>
   )
 }

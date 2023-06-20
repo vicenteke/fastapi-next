@@ -24,10 +24,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </Alert>
         <Navbar id='main-navbar'/>
         <br />
-        <main className="content">
-          <div className="container">
+        <main>
+          <section class="section">
             {children}
-          </div>
+          </section>
         </main>
         <Script src='/bulma.js'/>
       </body>

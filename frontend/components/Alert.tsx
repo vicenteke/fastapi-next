@@ -110,7 +110,7 @@ function Alert({
           <div className="card-content">
             {icon &&
             <div className='columns is-centered is-vcentered my-2'>
-              <div className='column is-5 level'>
+              <div className='column is-5 level mb-2'>
                 <Icon
                   icon={iconSymbol}
                   color={icon}

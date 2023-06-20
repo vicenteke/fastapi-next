@@ -26,15 +26,13 @@ function Image({
   ...props
 }: Props) {
   return (
-  <div>
-    <br />
+  <div className="block">
     {title && <div className="py-4 has-text-centered is-size-4">{title}</div>}
     <NextImage
       placeholder={placeholder}
       {...props}
     />
     {caption && <div className="py-2 has-text-centered has-text-weight-light">{caption}</div>}
-    <br />
   </div>)
 }
 
