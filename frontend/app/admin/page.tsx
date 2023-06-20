@@ -7,6 +7,7 @@ import Table from '@/components/Table';
 import Icon from '@/components/Icon';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import Pagination from '@/components/Pagination';
+import CRUD from '@/components/CRUD';
 
 
 export default function Home() {
@@ -44,6 +45,27 @@ export default function Home() {
           idColumn={0}
         />
         <Pagination totalPages={10} activePage={activePage} previous next onNavigate={setActivePage}/>
+
+        <CRUD
+          route='/permissions/table'
+          header={[
+            {
+              name: '#',
+              tableColumn: 'pk',
+              type: 'integer',
+            },
+            {
+              name: 'Name',
+              tableColumn: 'name',
+              type: 'string'
+            },
+            {
+              name: 'Description',
+              tableColumn: 'description',
+              type: 'string'
+            },
+          ]}
+        />
       </PermissionChecker>
     </>
   )

@@ -41,7 +41,11 @@ function Pagination({
   onNavigate,
   ...props
 }: Props) {
-  let classNames = [className, 'pagination', 'is-centered'];
+
+  if (totalPages < 2)
+    return <div className="block"></div>
+
+  let classNames = [className, 'pagination', 'is-left'];
   if (isRounded) classNames.push('is-rounded');
   if (size) classNames.push(`is-${size}`);
 
@@ -105,13 +109,13 @@ function Pagination({
           }
         </li>
       </ul>
-      {previous &&
+      {previous && activePage > 0 &&
         <a
           className="pagination-previous"
           onClick={() => handleClick(activePage - 1)}>{previous}
         </a>
       }
-      {next &&
+      {next && activePage < totalPages - 1 &&
         <a
           className="pagination-next"
           onClick={() => handleClick(activePage + 1)}>{next}

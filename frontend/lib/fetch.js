@@ -50,7 +50,8 @@ export default async function fetchServer(
         "headers": headers,
     };
 
-    if (payload) {
+    if (payload && !['GET', 'HEAD'].includes(method)) {
+        // TODO: handle GET payload on query string
         if (typeof payload !== 'string')
             payload = JSON.stringify(payload);
         requestInit.body = payload;
@@ -62,7 +63,7 @@ export default async function fetchServer(
         return await fetch(route, requestInit)
             .then((response) => {
                 if (!response.ok)
-                    onFetchError(response);
+                    onFetchError(response.data);
                 else
                     return response.json().then((response) => {
                         if (onSuccess) {
