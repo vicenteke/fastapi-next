@@ -1,12 +1,4 @@
-from fastapi import (
-    APIRouter,
-    Request,
-    status,
-    HTTPException,
-    Depends,
-    Security,
-    Path
-)
+from fastapi import APIRouter, Request, status, HTTPException, Depends, Security, Path
 from pydantic import BaseModel
 from typing import Annotated, Any
 
@@ -102,7 +94,7 @@ class _DefaultRouter:
         include_get_single=True,  # Whether to include the get "/pk" API
         include_table=True,  # Whether to include the "/table" API
         create_schema: BaseModel = None,  # Don't use create_base_schemas
-        identifier: str = 'pk',     # Column responsible to identify entry
+        identifier: str = "pk",  # Column responsible to identify entry
     ):
         """
         Returns the router object if auto_include_routes=True, otherwise
@@ -111,8 +103,10 @@ class _DefaultRouter:
         """
         if create_schema:
             base_schema = schema
+            _, _, query_params_schema = create_base_schemas(schema)
         else:
-            base_schema, create_schema = create_base_schemas(schema)
+            base_schema, create_schema, query_params_schema =\
+                create_base_schemas(schema)
 
         edit_permissions = list(set(edit_permissions + get_permissions))
 
@@ -121,6 +115,7 @@ class _DefaultRouter:
             This class is returned by the create() method. One can override the
             endpoint methods in order to change its behaviour.
             """
+
             def __init__(self, *args, **kwargs):
                 super().__init__(*args, **kwargs)
                 self.base_path = base_path
@@ -178,7 +173,8 @@ class _DefaultRouter:
                 if res is None:
                     raise self.not_found_exception(
                         msg=f"{self.model_name} entry with {self.identifier} ="
-                            f" '{id}' not found")
+                        f" '{id}' not found"
+                    )
                 return res
 
             def update(self, db_session, id, data, user):
@@ -193,7 +189,8 @@ class _DefaultRouter:
                 if res is None:
                     raise self.not_found_exception(
                         msg=f"{self.model_name} entry with {self.identifier} ="
-                            f" '{id}' not found")
+                        f" '{id}' not found"
+                    )
                 db_session.commit()
                 return res
 
@@ -209,9 +206,28 @@ class _DefaultRouter:
                 if res is None:
                     raise self.not_found_exception(
                         msg=f"{self.model_name} entry with {self.identifier} ="
-                            f" '{id}' not found")
+                        f" '{id}' not found"
+                    )
                 db_session.commit()
                 return res
+
+            def count(self, db_session, user, kwargs):
+                """
+                Method called by the table route to get the total items count.
+
+                Can be overriden for specific implementations if just
+                refactoring the repository isn't enough.
+                """
+                return self.repository(db_session, user).count(**kwargs)
+
+            def table(self, db_session, user, kwargs):
+                """
+                Method called by the table route.
+
+                Can be overriden for specific implementations if just
+                refactoring the repository isn't enough.
+                """
+                return self.repository(db_session, user).paginate(**kwargs)
 
             ##################################################################
             # Route Inclusion Methods: methods for including routes
@@ -221,7 +237,8 @@ class _DefaultRouter:
                 Method that actually includes the routes. If not called,
                 no route will be created
                 """
-                # TODO
+                if self.include_table:
+                    self._include_table_route()
                 if self.include_get_all:
                     self._include_get_all_route()
                 if self.include_get_single:
@@ -298,6 +315,20 @@ class _DefaultRouter:
                     summary=f"Delete {self.model_name} entry",
                 )
 
+            def _include_table_route(self) -> None:
+                """
+                Includes the DELETE /base_path/table endpoint for retrieving
+                table data
+                """
+                self.add_api_route(
+                    f"/{base_path}/table",
+                    self._route_table,
+                    response_model=TableSchema[self.base_schema],
+                    status_code=status.HTTP_200_OK,
+                    methods=["GET"],
+                    summary=f"Get {self.model_name} table data",
+                )
+
             ##################################################################
             # Internal Methods: helper and chore methods
 
@@ -326,10 +357,7 @@ class _DefaultRouter:
                 res = self.create(
                     db_session, self._map_fields(data, create_schema), user
                 )
-                return {
-                    "data": res,
-                    "detail": f"Created {self.model_name}: {data}"
-                }
+                return {"data": res, "detail": f"Created {self.model_name}: {data}"}
 
             def _route_update(
                 self,
@@ -347,42 +375,36 @@ class _DefaultRouter:
                 )
                 return {
                     "data": res,
-                    "detail":
-                    f"Updated {self.model_name} where {self.identifier} = "
-                    f"'{id}': {data}"
+                    "detail": f"Updated {self.model_name} where {self.identifier} = "
+                    f"'{id}': {data}",
                 }
 
             def _route_get_all(
                 self,
                 request: Request,
                 db_session: Annotated[Session, Depends(get_db)],
-                user: Annotated[
-                    UserSchema, Security(get_user, scopes=get_permissions)
-                ],
+                user: Annotated[UserSchema, Security(get_user, scopes=get_permissions)],
             ):
                 f"""Creates a {self.model_name} entry"""
                 res = self.all(db_session, user)
                 return {
                     "data": res,
-                    "detail": f"Retrieved all {self.model_name} entries"
+                    "detail": f"Retrieved all {self.model_name} entries",
                 }
 
             def _route_get_single(
                 self,
                 request: Request,
                 db_session: Annotated[Session, Depends(get_db)],
-                user: Annotated[
-                    UserSchema, Security(get_user, scopes=get_permissions)
-                ],
+                user: Annotated[UserSchema, Security(get_user, scopes=get_permissions)],
                 id: Any = Path(title="Unique identifier"),
             ):
                 f"""Get {self.model_name} single entry"""
                 res = self.one(db_session, id, user)
                 return {
                     "data": res,
-                    "detail":
-                    f"Retrieved {self.model_name} entry where "
-                    f"{self.identifier} = '{id}'"
+                    "detail": f"Retrieved {self.model_name} entry where "
+                    f"{self.identifier} = '{id}'",
                 }
 
             def _route_delete(
@@ -398,19 +420,39 @@ class _DefaultRouter:
                 res = self.delete(db_session, id, user)
                 return {
                     "data": res,
-                    "detail":
-                    f"Deleted {self.model_name} entry where {self.identifier} "
-                    f"= '{id}'"
+                    "detail": f"Deleted {self.model_name} entry where "
+                    f"{self.identifier} = '{id}'",
                 }
+
+            def _route_table(
+                self,
+                request: Request,
+                db_session: Annotated[Session, Depends(get_db)],
+                user: Annotated[
+                    UserSchema, Security(get_user, scopes=get_permissions)
+                ],
+                query_params: query_params_schema = Depends(),
+            ):
+                f"""Get {self.model_name} table data"""
+                kwargs = {
+                    key: value for key, value in query_params
+                    if value is not None
+                }
+                rows = self.table(db_session, user, kwargs)
+                if 'page' in kwargs:
+                    kwargs.pop('page')
+                if 'per_page' in kwargs:
+                    kwargs.pop('per_page')
+                total = self.count(db_session, user, kwargs)
+                return {"total": total, "rows": rows}
 
             ##################################################################
             # Excpetions
 
-            def not_found_exception(self, msg="",
-                                    status=status.HTTP_404_NOT_FOUND):
+            def not_found_exception(self, msg="", status=status.HTTP_404_NOT_FOUND):
                 return HTTPException(
                     status_code=status,
-                    detail=msg or f"{self.model_name} entry not found"
+                    detail=msg or f"{self.model_name} entry not found",
                 )
 
         if auto_include_routes:
