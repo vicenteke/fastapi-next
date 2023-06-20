@@ -25,7 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Navbar id='main-navbar'/>
         <br />
         <main>
-          <section class="section">
+          <section className="section">
             {children}
           </section>
         </main>
