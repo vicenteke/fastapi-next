@@ -63,7 +63,8 @@ export default async function fetchServer(
         return await fetch(route, requestInit)
             .then((response) => {
                 if (!response.ok)
-                    onFetchError(response.data);
+                    return response.json().then(
+                        response => onFetchError(response.detail));
                 else
                     return response.json().then((response) => {
                         if (onSuccess) {

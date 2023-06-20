@@ -48,6 +48,7 @@ export default function Home() {
 
         <CRUD
           route='/permissions/table'
+          useDropup
           header={[
             {
               name: '#',
