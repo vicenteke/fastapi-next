@@ -125,10 +125,13 @@ class Repository:
 
         return entries or None
 
-    def paginate(self, page=0, per_page=10, **kwargs):
+    def paginate(self, page=0, per_page=None, **kwargs):
         """Method used to create pagination, where 'page' is the current page
         index and 'per_page' is the number of items per page.
         """
+        if per_page is None:
+            return self.all(**kwargs)
+
         page = int(page or 0)
         per_page = int(per_page or 0)
         if page < 0:

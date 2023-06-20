@@ -23,6 +23,7 @@ interface Props {
   route: string
   header: Array<HeaderProps>
   useDropup?: boolean
+  noPagination?: boolean
 }
 
 
@@ -35,6 +36,7 @@ function CRUD({
   route,
   header,
   useDropup,
+  noPagination
 }: Props) {
   const [activePage, setActivePage] = useState(0);
   const [perPage, setPerPage] = useState(10);
@@ -56,7 +58,7 @@ function CRUD({
     return res
   }, Array());
 
-  let queryParams = `?page=${activePage}&per_page=${perPage}`;
+  let queryParams = noPagination ? '?' : `?page=${activePage}&per_page=${perPage}`;
   const firstItemNumber = activePage * perPage + 1;
 
   const handleSetPerPage = () => {
@@ -110,7 +112,7 @@ function CRUD({
         isHoverable
         isFullwidth
     />
-    <Pagination
+    {!noPagination && <><Pagination
       totalPages={Math.ceil(total / perPage)}
       activePage={activePage}
       previous
@@ -162,7 +164,7 @@ function CRUD({
           </div>
         </div>
       </div>
-    </div>
+    </div></>}
   </div>)
 }
 
