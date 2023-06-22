@@ -2,13 +2,17 @@ const bulmaColors = ['primary', 'link', 'info', 'success', 'warning', 'danger'] 
 const bulmaShades = ['white', 'light', 'dark', 'black'] as const;
 const bulmaSizes = ['small', 'normal', 'medium', 'large'] as const;
 const bulmaStyles = ['outlined', 'inverted', 'rounded'] as const;
+const bulmaStates = ['hovered', 'focused', 'loading'] as const;
 const alertTypes = ['success', 'warning', 'info', 'danger', 'default'] as const;
+const inputTypes = ['text', 'password', 'email', 'tel'] as const; // Supported input types
 
 export type BulmaColors = (typeof bulmaColors)[number];
 export type BulmaShades = (typeof bulmaShades)[number];
 export type BulmaSizes = (typeof bulmaSizes)[number];
 export type BulmaStyles = (typeof bulmaStyles)[number];
+export type BulmaStates = (typeof bulmaStates)[number];
 export type AlertTypes = (typeof alertTypes)[number];
+export type InputTypes = (typeof inputTypes)[number];
 
 export interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
   className?: string;

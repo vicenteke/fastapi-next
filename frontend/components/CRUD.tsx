@@ -8,20 +8,24 @@ import Pagination from './Pagination';
 import fetchServer from '@/lib/fetch';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { getToken } from '@/lib/token';
+import { InputTypes } from '@/constants/types';
+import { Props as InputProps } from "./Input";
 
 
-interface HeaderProps {
+export interface TableColumnProps {
   tableColumn: string
   name: string
-  type: 'string' | 'integer' | 'float' | 'select' | 'boolean'
+  type: InputTypes
   getData?: (data: any) => any
   permissions?: Array<string>
+  getOptions?: () => Array<{text: string, value: string}>
+  inputProps?: InputProps
 }
 
 
 interface Props {
   route: string
-  header: Array<HeaderProps>
+  header: Array<TableColumnProps>
   useDropup?: boolean
   noPagination?: boolean
 }

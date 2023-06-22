@@ -37,14 +37,14 @@ export default function Home() {
         <Button href='/'>
           Home
         </Button>
-        <Table
+        {/* <Table
           header={tableHeader}
           footer={tableFooter}
           body={tableBody}
           activeRow={2}
           idColumn={0}
         />
-        <Pagination totalPages={10} activePage={activePage} previous next onNavigate={setActivePage}/>
+        <Pagination totalPages={10} activePage={activePage} previous next onNavigate={setActivePage}/> */}
 
         <CRUD
           route='/permissions/table'
