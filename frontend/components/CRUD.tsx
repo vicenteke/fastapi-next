@@ -20,6 +20,7 @@ export interface TableColumnProps {
   permissions?: Array<string>
   getOptions?: () => Array<{text: string, value: string}>
   inputProps?: InputProps
+  customInput?: React.ReactNode
 }
 
 
@@ -31,10 +32,10 @@ interface Props {
 }
 
 
-/* Description: implementation of an image element using best practices.
+/* Description: 
  *
- * Props (also includes NextImage props):
- * - title: image title, which goes above the image;
+ * Props:
+ * - tableColumn: ;
  */
 function CRUD({
   route,
