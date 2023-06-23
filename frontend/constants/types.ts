@@ -4,7 +4,7 @@ const bulmaSizes = ['small', 'normal', 'medium', 'large'] as const;
 const bulmaStyles = ['outlined', 'inverted', 'rounded'] as const;
 const bulmaStates = ['hovered', 'focused', 'loading'] as const;
 const alertTypes = ['success', 'warning', 'info', 'danger', 'default'] as const;
-const inputTypes = ['text', 'password', 'email', 'tel'] as const; // Supported input types
+const inputTypes = ['text', 'password', 'email', 'tel', 'none'] as const; // Supported input types
 
 export type BulmaColors = (typeof bulmaColors)[number];
 export type BulmaShades = (typeof bulmaShades)[number];

@@ -1,5 +1,7 @@
 "use client";
 
+// TODO: implement other types of input, including hidden, select, radio, checkbox
+
 import React, { useState } from "react";
 import Icon from "./Icon";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";

@@ -3,11 +3,10 @@
 import { useState } from 'react';
 import PermissionChecker from '@/components/PermissionChecker';
 import Button from '@/components/Button';
-import Table from '@/components/Table';
 import Icon from '@/components/Icon';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import Pagination from '@/components/Pagination';
 import CRUD from '@/components/CRUD';
+import CRUDEditForm from '@/components/CRUDEditForm';
 
 
 export default function Home() {
@@ -37,37 +36,51 @@ export default function Home() {
         <Button href='/'>
           Home
         </Button>
-        {/* <Table
-          header={tableHeader}
-          footer={tableFooter}
-          body={tableBody}
-          activeRow={2}
-          idColumn={0}
-        />
-        <Pagination totalPages={10} activePage={activePage} previous next onNavigate={setActivePage}/> */}
 
         <CRUD
-          route='/permissions/table'
+          route='/permissions'
           useDropup
           noPagination
           header={[
             {
               name: '#',
               tableColumn: 'pk',
-              type: 'integer',
+              type: 'text',
             },
             {
               name: 'Name',
               tableColumn: 'name',
-              type: 'string'
+              type: 'text'
             },
             {
               name: 'Description',
               tableColumn: 'description',
-              type: 'string'
+              type: 'text'
             },
           ]}
         />
+
+        <h3 className='subtitle'>Create new permission</h3>
+        <CRUDEditForm
+          fields={[{
+            name: 'Name',
+            tableColumn: 'name',
+            type: 'text'
+          },
+          {
+            name: 'Description',
+            tableColumn: 'description',
+            type: 'text'
+          }]}
+          columns={[{
+            tableColumn: 'name',
+          },
+          {
+            tableColumn: 'description',
+          }]}
+          route={'/permissions'}
+        />
+
       </PermissionChecker>
     </>
   )

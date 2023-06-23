@@ -6,7 +6,7 @@ import Table from './Table';
 import Icon from './Icon';
 import Pagination from './Pagination';
 import fetchServer from '@/lib/fetch';
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { getToken } from '@/lib/token';
 import { InputTypes } from '@/constants/types';
 import { Props as InputProps } from "./Input";
@@ -18,7 +18,7 @@ export interface TableColumnProps {
   type: InputTypes
   getData?: (data: any) => any
   permissions?: Array<string>
-  getOptions?: () => Array<{text: string, value: string}>
+  getOptions?: () => Array<{text: string, value: string}> // TODO: implement Select input
   inputProps?: InputProps
   customInput?: React.ReactNode
 }
@@ -55,7 +55,36 @@ function CRUD({
   if (useDropup) dropdownClasses.push('is-up');
   if (perPageDropdown) dropdownClasses.push('is-active');
 
-  const tableHeader = header.reduce((res, column) => {
+  // Include actions column
+  const getActions = (data: any) => {
+    return (<>
+      <Button
+        color='danger'
+        onClick={() => {
+          fetchServer(
+            `${route}/${data.pk}`,
+            {
+              method: 'DELETE',
+              onError: () => loadData(),
+              onSuccess: () => loadData()
+            }
+          )
+        }}
+      >
+        <Icon icon={faTrash}/>
+      </Button>
+    </>)
+  }
+
+  const headerWithActions = Array<TableColumnProps>(...header, {
+    tableColumn: 'none',
+    name: 'Actions',
+    type: 'none',
+    getData: getActions,
+  });
+
+  // Data and handlers
+  const tableHeader = headerWithActions.reduce((res, column) => {
     if (column.permissions) {
       if (column.permissions.every(p => token.scopes.includes(p)))
         res.push(column.name)
@@ -79,7 +108,7 @@ function CRUD({
 
   const structureData = (data: Array<any>) => {
     const structured = data.map((entry) => {
-      return header.reduce((res, headItem) => {
+      const structData = header.reduce((res, headItem) => {
         if (tableHeader.includes(headItem.name)) {
           if (headItem.getData)
             res.push(headItem.getData(entry[headItem.tableColumn]))
@@ -88,6 +117,8 @@ function CRUD({
         }
         return res
       }, Array());
+      structData.push(getActions(entry));
+      return structData;
     });
     setBody(structured);
   }
@@ -99,7 +130,7 @@ function CRUD({
 
   const loadData = () => {
     fetchServer(
-      route + queryParams,
+      route + '/table' + queryParams,
       {
         onSuccess: handleSuccess
       }
