@@ -81,7 +81,7 @@ function CRUDEditForm({
       return <Input
         key={index}
         name={entry.column.tableColumn}
-        value={data[entry.column.tableColumn]}
+        value={data[entry.column.tableColumn] || ''}
         onChange={handleFieldChange}
         label={entry.field.name}
         type={entry.field.type}
