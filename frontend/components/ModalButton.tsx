@@ -5,7 +5,7 @@ import { bulmaModalTriggerJS, clearClickEventListeners } from '@/lib/bulma.js'
 import { ButtonProps } from "@/constants/types";
 import Button from "./Button";
 
-interface Props  extends ButtonProps {
+interface Props extends ButtonProps {
   target: string;
 };
 

@@ -40,7 +40,6 @@ export default function Home() {
         <CRUD
           route='/permissions'
           useDropup
-          noPagination
           header={[
             {
               name: '#',

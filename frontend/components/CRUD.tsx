@@ -4,12 +4,14 @@ import { useState, useEffect } from 'react';
 import Button from './Button';
 import Table from './Table';
 import Icon from './Icon';
-import Pagination from './Pagination';
+import CRUDPagination from './CRUDPagination';
 import fetchServer from '@/lib/fetch';
-import { faChevronDown, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { getToken } from '@/lib/token';
 import { InputTypes } from '@/constants/types';
 import { Props as InputProps } from "./Input";
+
+import { generateId } from '@/lib/random';
 
 
 export interface TableColumnProps {
@@ -148,59 +150,17 @@ function CRUD({
         isHoverable
         isFullwidth
     />
-    {!noPagination && <><Pagination
-      totalPages={Math.ceil(total / perPage)}
+    {!noPagination && <CRUDPagination
+      id={route + generateId()}
+      perPage={perPage}
+      firstItemNumber={firstItemNumber}
+      lastItemNumber={firstItemNumber + body.length - 1}
+      total={total}
       activePage={activePage}
-      previous
-      next
-      onNavigate={setActivePage}
-      isRounded
-    />
-    <div className='level is-mobile'>
-      <div className='level-left'></div>
-      <div className='level-right'>
-        <div className='level-item'>
-          <span>
-            {firstItemNumber} - {firstItemNumber + body.length - 1} out of {total}
-          </span>
-        </div>
-        <div className='level-item'>
-          <div className={dropdownClasses.join(' ')}>
-            <div className="dropdown-trigger">
-              <Button
-                color='normal'
-                variant='rounded'
-                aria-haspopup="true"
-                aria-controls={`crud-perpage-${total}${route}${queryParams}`}
-                onClick={() => setPerPageDropdown(!perPageDropdown)}
-              >
-                <span>{perPage} per page</span>
-                <Icon icon={faChevronDown}/>
-              </Button>
-            </div>
-            <div className="dropdown-menu" id={`crud-perpage-${total}${route}${queryParams}`}>
-              <div className="dropdown-content px-4 py-4">
-                <div className='field has-addons is-rounded'>
-                  <div className='control'>
-                    <input
-                      className='mb-2 is-rounded'
-                      type="number"
-                      min={1}
-                      value={perPageInput}
-                      onChange={(e) => setPerPageInput(e.target.value)}
-                      required
-                    />
-                  </div>
-                  <div className='control'>
-                    <Button color='info' variant='rounded' onClick={handleSetPerPage}>Reload</Button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div></>}
+      setActivePage={setActivePage}
+      setPerPage={setPerPage}
+      useDropup
+    />}
   </div>)
 }
 
