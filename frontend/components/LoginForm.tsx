@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import Button from "./Button";
 import { setToken } from "@/lib/token";
 import fetchServer from "@/lib/fetch.js";
@@ -10,6 +10,7 @@ import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 
 interface Props {
     redirect?: boolean;
+    onLogin?: () => void
 }
 
 
@@ -19,24 +20,30 @@ interface Props {
  * go to the previous page or to the one specified in the search param
  * "redirect". NOTE: it will forcedly reload the entire page, so the
  * permissions are re-evaluated.
+ * - onLogin: method to be executed after login;
  */
-export default function LoginForm({ redirect=true }: Props) {
+export default function LoginForm({ redirect=true, onLogin }: Props) {
     const loginRoute = '/token';
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const searchParams = useSearchParams();
     const redirectRoute = searchParams?.get('redirect');
+    const router = useRouter();
 
     const onSuccess = (token: object) => {
         setToken(token);
         setLoading(false);
         if (redirect) {
-            if (redirectRoute === null || typeof redirectRoute !== 'string')
-                history.back();
-            else
-                window.location.href = redirectRoute;
+            if (typeof redirectRoute !== 'string') router.back();
+            else router.replace(redirectRoute);
         }
+        setTimeout(
+            () => {
+                window.location.reload();
+                if (onLogin) onLogin();
+            }, 300  // Delaying so router can complete its navigation
+        )
     }
 
     const onSubmit = (event: React.MouseEvent<HTMLElement>) => {

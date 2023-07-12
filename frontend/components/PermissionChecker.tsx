@@ -61,11 +61,11 @@ function PermissionChecker({
                 permissionsMatch = permissions.every(p => token.scopes.includes(p));
 
             if (reverse)
-                permissionsMatch = !permissionsMatch
+                permissionsMatch = !permissionsMatch;
 
             setAuthorized(permissionsMatch);
         } else if (token === null) {
-            setAuthorized(false);
+            setAuthorized(reverse);     // If reverse, will always match
         }
         if (tokenFlag && authorized === false && redirect) {
             router.push(redirectRoute);

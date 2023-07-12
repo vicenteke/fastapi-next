@@ -47,15 +47,9 @@ function CRUD({
 }: Props) {
   const [activePage, setActivePage] = useState(0);
   const [perPage, setPerPage] = useState(10);
-  const [perPageInput, setPerPageInput] = useState('10');
-  const [perPageDropdown, setPerPageDropdown] = useState(false);
   const [total, setTotal] = useState(0);
   const [body, setBody] = useState<Array<Array<any>>>([]);
   const [token, setToken] = useState(getToken());
-
-  const dropdownClasses = ['dropdown', 'is-right'];
-  if (useDropup) dropdownClasses.push('is-up');
-  if (perPageDropdown) dropdownClasses.push('is-active');
 
   // Include actions column
   const getActions = (data: any) => {
@@ -96,17 +90,6 @@ function CRUD({
 
   let queryParams = noPagination ? '?' : `?page=${activePage}&per_page=${perPage}`;
   const firstItemNumber = activePage * perPage + 1;
-
-  const handleSetPerPage = () => {
-    const value = parseInt(perPageInput);
-    setPerPageDropdown(false);
-    if (isNaN(value)) {
-      setPerPageInput(String(perPage));
-    } else if (value !== perPage) {
-      setActivePage(Math.floor((firstItemNumber - 1) / value));
-      setPerPage(value);
-    }
-  }
 
   const structureData = (data: Array<any>) => {
     const structured = data.map((entry) => {
@@ -159,7 +142,7 @@ function CRUD({
       activePage={activePage}
       setActivePage={setActivePage}
       setPerPage={setPerPage}
-      useDropup
+      useDropup={useDropup}
     />}
   </div>)
 }

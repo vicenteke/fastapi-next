@@ -3,7 +3,6 @@
  * - rightMenu: the items right-aligned on navbar;
  */
 
-import Link from "next/link";
 import { ItemProps } from "./NavbarLinks";
 import Button from "./Button";
 import LogoutButton from "./LogoutButton";
@@ -21,8 +20,8 @@ export const leftMenu: Array<ItemProps> = [
                 href: '/about'
             },
             {
-                html: 'Contact',
-                href: '/'
+                html: 'Admin',
+                href: '/admin'
             },
             null,
             {
@@ -48,7 +47,8 @@ export const rightMenu: Array<ItemProps> = [
         }
     },
     {
-        html: <Button variant="inverted" href='/login'>Login</Button>,
+        html: 'Login',
+        href: '/login',
         auth: {
             permissions: ['IS_ADMIN'],
             reverse: true,
