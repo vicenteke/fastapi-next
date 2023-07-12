@@ -5,6 +5,7 @@ import Button from './Button';
 import Table from './Table';
 import Icon from './Icon';
 import CRUDPagination from './CRUDPagination';
+import CRUDEditForm from './CRUDEditForm';
 import fetchServer from '@/lib/fetch';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { getToken } from '@/lib/token';
@@ -50,6 +51,14 @@ function CRUD({
   const [total, setTotal] = useState(0);
   const [body, setBody] = useState<Array<Array<any>>>([]);
   const [token, setToken] = useState(getToken());
+  const values = [{   // TODO: get values
+    tableColumn: 'name',
+    value: 'John Kane'
+  },
+  {
+    tableColumn: 'description',
+    value: 'Just another test :)',
+  }]
 
   // Include actions column
   const getActions = (data: any) => {
@@ -144,6 +153,11 @@ function CRUD({
       setPerPage={setPerPage}
       useDropup={useDropup}
     />}
+    <CRUDEditForm   // TODO: enable edit and create entries
+      fields={header}
+      values={values}
+      route={'/permissions'}
+    />
   </div>)
 }
 

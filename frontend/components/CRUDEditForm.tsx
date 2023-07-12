@@ -15,7 +15,7 @@ interface ColumnProps {
 
 interface Props {
   fields: Array<TableColumnProps>
-  columns: Array<ColumnProps>
+  values: Array<ColumnProps>
   route?: string
   onSubmit?: (data: any) => void
 }
@@ -27,24 +27,23 @@ interface Props {
 function CRUDEditForm({
   route,
   fields,
-  columns,
+  values,
   onSubmit,
 }: Props) {
   if (!route && !onSubmit) {
     throw new Error('CRUDEditForm requires either a route or an onSubmit method!');
   }
 
-  const fieldData = Array<{field: TableColumnProps, column: ColumnProps}>();
+  const fieldData = Array<{field: TableColumnProps, value?: any}>();
   const getInitialData = () => {
-    const data = columns.reduce((res, col) => {
-      const field = fields.find(entry => entry.tableColumn === col.tableColumn);
-      if (field)
-        fieldData.push({field: field, column: col});
-      if (col.value) {
-        res[col.tableColumn] = col.value;
+    const data = fields.reduce((res, field) => {
+      const value = values.find(entry => entry.tableColumn === field.tableColumn);
+      fieldData.push({field: field});
+      res[field.tableColumn] = value?.value;
+      if (value)
         res.method = 'PUT';   // If getting initial data, use PUT
-      }
-      return res;
+
+      return res
     }, Object());
 
     if (!data.method) data.method = 'POST';
@@ -83,8 +82,8 @@ function CRUDEditForm({
 
       return <Input
         key={index}
-        name={entry.column.tableColumn}
-        value={data[entry.column.tableColumn] || ''}
+        name={entry.field.tableColumn}
+        value={data[entry.field.tableColumn] || ''}
         onChange={handleFieldChange}
         label={entry.field.name}
         type={entry.field.type}

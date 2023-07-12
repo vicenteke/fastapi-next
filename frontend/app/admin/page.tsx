@@ -58,28 +58,6 @@ export default function Home() {
             },
           ]}
         />
-
-        <h3 className='subtitle'>Create new permission</h3>
-        <CRUDEditForm
-          fields={[{
-            name: 'Name',
-            tableColumn: 'name',
-            type: 'text'
-          },
-          {
-            name: 'Description',
-            tableColumn: 'description',
-            type: 'text'
-          }]}
-          columns={[{
-            tableColumn: 'name',
-          },
-          {
-            tableColumn: 'description',
-          }]}
-          route={'/permissions'}
-        />
-
       </PermissionChecker>
     </>
   )
