@@ -18,6 +18,7 @@ interface Props {
   values: Array<ColumnProps>
   route?: string
   onSubmit?: (data: any) => void
+  id?: string
 }
 
 
@@ -29,6 +30,7 @@ function CRUDEditForm({
   fields,
   values,
   onSubmit,
+  id,
 }: Props) {
   if (!route && !onSubmit) {
     throw new Error('CRUDEditForm requires either a route or an onSubmit method!');
@@ -72,7 +74,7 @@ function CRUDEditForm({
     )
   }
 
-  return <div className="block">
+  return <div className="block" id={id}>
     {fieldData.map((entry, index) => {
       if (entry.field.customInput)
         return entry.field.customInput;

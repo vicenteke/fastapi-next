@@ -7,12 +7,15 @@ import Icon from './Icon';
 import CRUDPagination from './CRUDPagination';
 import CRUDEditForm from './CRUDEditForm';
 import fetchServer from '@/lib/fetch';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faPencil, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { getToken } from '@/lib/token';
 import { InputTypes } from '@/constants/types';
 import { Props as InputProps } from "./Input";
+import Modal from './Modal';
+import ModalButton from './ModalButton';
 
 import { generateId } from '@/lib/random';
+import { setCRUDFormData } from '@/lib/crud';
 
 
 export interface TableColumnProps {
@@ -59,6 +62,9 @@ function CRUD({
     tableColumn: 'description',
     value: 'Just another test :)',
   }]
+  const [id, ] = useState(generateId());
+  const modalId = `modal-${route.replace('/', '')}-${id}`;
+  const formId = `form-${route.replace('/', '')}-${id}`;
 
   // Include actions column
   const getActions = (data: any) => {
@@ -78,6 +84,15 @@ function CRUD({
       >
         <Icon icon={faTrash}/>
       </Button>
+      <ModalButton
+        color='warning'
+        target={modalId}
+        onClick={() => {
+          setCRUDFormData(formId, data);
+        }}
+      >
+        <Icon icon={faPencil}/>
+      </ModalButton>
     </>)
   }
 
@@ -136,6 +151,15 @@ function CRUD({
   }, [activePage, perPage, token])
 
   return (<div className='block'>
+    <Modal id={modalId}>
+      <CRUDEditForm   // TODO: remove values parameter and use setCRUDFormData
+        fields={header}
+        values={values}
+        route={route}
+        id={formId}
+      />
+    </Modal>
+    <ModalButton target={modalId} className='mb-1'><Icon icon={faPlus} /></ModalButton>
     <Table
         header={tableHeader}
         body={body}
@@ -143,7 +167,7 @@ function CRUD({
         isFullwidth
     />
     {!noPagination && <CRUDPagination
-      id={route + generateId()}
+      id={route + id}
       perPage={perPage}
       firstItemNumber={firstItemNumber}
       lastItemNumber={firstItemNumber + body.length - 1}
@@ -153,11 +177,6 @@ function CRUD({
       setPerPage={setPerPage}
       useDropup={useDropup}
     />}
-    <CRUDEditForm   // TODO: enable edit and create entries
-      fields={header}
-      values={values}
-      route={'/permissions'}
-    />
   </div>)
 }
 

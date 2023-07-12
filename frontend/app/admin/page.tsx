@@ -6,7 +6,6 @@ import Button from '@/components/Button';
 import Icon from '@/components/Icon';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import CRUD from '@/components/CRUD';
-import CRUDEditForm from '@/components/CRUDEditForm';
 
 
 export default function Home() {
