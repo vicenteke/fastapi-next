@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useId } from 'react';
 import Button from './Button';
 import Table from './Table';
 import Icon from './Icon';
@@ -14,8 +14,8 @@ import { Props as InputProps } from "./Input";
 import Modal from './Modal';
 import ModalButton from './ModalButton';
 
-import { generateId } from '@/lib/random';
-import { setCRUDFormData } from '@/lib/crud';
+import { decodeId } from '@/lib/random';
+import { clearCRUDFormData, setCRUDFormData } from '@/lib/crud';
 
 
 export interface TableColumnProps {
@@ -62,7 +62,8 @@ function CRUD({
     tableColumn: 'description',
     value: 'Just another test :)',
   }]
-  const [id, ] = useState(generateId());
+  const idHook = useId();
+  const id = decodeId(idHook);
   const modalId = `modal-${route.replace('/', '')}-${id}`;
   const formId = `form-${route.replace('/', '')}-${id}`;
 
@@ -159,7 +160,9 @@ function CRUD({
         id={formId}
       />
     </Modal>
-    <ModalButton target={modalId} className='mb-1'><Icon icon={faPlus} /></ModalButton>
+    <ModalButton target={modalId} className='mb-1' onClick={() => clearCRUDFormData(formId)}>
+      <Icon icon={faPlus} />
+    </ModalButton>
     <Table
         header={tableHeader}
         body={body}

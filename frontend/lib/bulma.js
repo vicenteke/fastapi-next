@@ -73,13 +73,15 @@ export function closeAllModals() {
 export function bulmaModalTriggerJS(triggerElementId) {
   // Add a click event on buttons (or any element) to open a specific modal
   const triggerElement = document.getElementById(triggerElementId);
+  if (!triggerElement)
+    throw new Error(`Unable to find modal trigger with id "${triggerElementId}"`);
   const modal = triggerElement.dataset.target;
   const $target = document.getElementById(modal);
 
   const listener = () => {
     openModal($target);
   }
-    triggerElement.addEventListener('click', listener);
+  triggerElement.addEventListener('click', listener);
   return [[triggerElement, listener]]
 }
 
