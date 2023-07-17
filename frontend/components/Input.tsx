@@ -1,6 +1,6 @@
 "use client";
 
-// TODO: implement other types of input, including hidden, select, radio, checkbox
+// TODO: implement other types of input, including select, radio, checkbox
 
 import React, { useState } from "react";
 import Icon from "./Icon";
@@ -56,8 +56,27 @@ function Input({
   iconRight,
   ...props
 }: Props) {
-  const [inputValue, setInputValue] = useState<any>(value);
+  if (type === 'none')
+    return <></>
+
+  const [inputValue, setInputValue] = useState<any>(value || '');
   const [validation, setValidation] = useState<boolean | null>(null);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (onChange)
+    onChange(event);
+    if (validate)
+    setValidation(validate(event.target.value));
+    setInputValue(event.target.value);
+  }
+
+  if (type === 'hidden')
+    return <input
+      type={type}
+      value={inputValue}
+      onChange={handleChange}
+      {...props}
+    />
 
   let inputClasses = ['input'];
   if (validation === true) inputClasses.push('is-success');
@@ -77,14 +96,6 @@ function Input({
   }
   if (iconRight && !React.isValidElement(iconRight)) {
     iconRight = <Icon icon={iconRight} isRight size='small'/>
-  }
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (onChange)
-      onChange(event);
-    if (validate)
-      setValidation(validate(event.target.value));
-    setInputValue(event.target.value);
   }
 
   return (

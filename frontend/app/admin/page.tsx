@@ -9,19 +9,19 @@ import CRUD from '@/components/CRUD';
 
 
 export default function Home() {
-  const tableHeader = ['ID', 'Name', 'Points', 'Actions'];
-  const tableFooter = ['', 'Total', 280, ''];
-  const tableBody = [
-    [1, 'Player 1', 10, <Button color='info'><Icon icon={faUser} /></Button>],
-    [2, 'Player 2', 20, <Button color='info'><Icon icon={faUser} /></Button>],
-    [3, 'Player 3', 30, <Button color='info'><Icon icon={faUser} /></Button>],
-    [4, 'Player 4', 40, <Button color='info'><Icon icon={faUser} /></Button>],
-    [5, 'Player 5', 50, <Button color='info'><Icon icon={faUser} /></Button>],
-    [6, 'Player 6', 60, <Button color='info'><Icon icon={faUser} /></Button>],
-    [7, 'Player 7', 70, <Button color='info'><Icon icon={faUser} /></Button>],
-  ];
+  // const tableHeader = ['ID', 'Name', 'Points', 'Actions'];
+  // const tableFooter = ['', 'Total', 280, ''];
+  // const tableBody = [
+  //   [1, 'Player 1', 10, <Button color='info'><Icon icon={faUser} /></Button>],
+  //   [2, 'Player 2', 20, <Button color='info'><Icon icon={faUser} /></Button>],
+  //   [3, 'Player 3', 30, <Button color='info'><Icon icon={faUser} /></Button>],
+  //   [4, 'Player 4', 40, <Button color='info'><Icon icon={faUser} /></Button>],
+  //   [5, 'Player 5', 50, <Button color='info'><Icon icon={faUser} /></Button>],
+  //   [6, 'Player 6', 60, <Button color='info'><Icon icon={faUser} /></Button>],
+  //   [7, 'Player 7', 70, <Button color='info'><Icon icon={faUser} /></Button>],
+  // ];
 
-  const [activePage, setActivePage] = useState(0);
+  // const [activePage, setActivePage] = useState(0);
 
   return (
     <>
@@ -43,7 +43,7 @@ export default function Home() {
             {
               name: '#',
               tableColumn: 'pk',
-              type: 'text',
+              type: 'hidden',
             },
             {
               name: 'Name',

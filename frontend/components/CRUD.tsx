@@ -5,7 +5,7 @@ import Button from './Button';
 import Table from './Table';
 import Icon from './Icon';
 import CRUDPagination from './CRUDPagination';
-import CRUDEditForm from './CRUDEditForm';
+import CRUDForm from './CRUDForm';
 import fetchServer from '@/lib/fetch';
 import { faPencil, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { getToken } from '@/lib/token';
@@ -54,14 +54,6 @@ function CRUD({
   const [total, setTotal] = useState(0);
   const [body, setBody] = useState<Array<Array<any>>>([]);
   const [token, setToken] = useState(getToken());
-  const values = [{   // TODO: get values
-    tableColumn: 'name',
-    value: 'John Kane'
-  },
-  {
-    tableColumn: 'description',
-    value: 'Just another test :)',
-  }]
   const idHook = useId();
   const id = decodeId(idHook);
   const modalId = `modal-${route.replace('/', '')}-${id}`;
@@ -69,6 +61,7 @@ function CRUD({
 
   // Include actions column
   const getActions = (data: any) => {
+    data.method = 'PUT';
     return (<>
       <Button
         color='danger'
@@ -153,9 +146,8 @@ function CRUD({
 
   return (<div className='block'>
     <Modal id={modalId}>
-      <CRUDEditForm   // TODO: remove values parameter and use setCRUDFormData
+      <CRUDForm
         fields={header}
-        values={values}
         route={route}
         id={formId}
       />
