@@ -4,8 +4,10 @@ export function setCRUDFormData(formId: string, data: any) {
 
   for (const key in data) {
     const input = form.querySelector(`input[name='${key}']`);
-    if (input)
+    if (input) {
+      input.value = data[key];
       input.setAttribute('value', data[key]);
+    }
   }
 }
 
@@ -30,8 +32,12 @@ export function clearCRUDFormData(formId: string) {
   const inputs = form.querySelectorAll(`input`);
   inputs.forEach((input) => {
     if (input.getAttribute('name') === 'method' &&
-        input.getAttribute('type') === 'hidden')
+        input.getAttribute('type') === 'hidden') {
+      input.value = 'POST';
       input.setAttribute('value', 'POST');
-    else input.removeAttribute('value');
+    } else {
+      input.value = null;
+      input.removeAttribute('value');
+    }
   });
 }

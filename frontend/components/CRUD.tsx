@@ -150,6 +150,8 @@ function CRUD({
         fields={header}
         route={route}
         id={formId}
+        modalId={modalId}
+        afterSubmit={() => loadData()}
       />
     </Modal>
     <ModalButton target={modalId} className='mb-1' onClick={() => clearCRUDFormData(formId)}>

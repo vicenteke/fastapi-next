@@ -12,7 +12,9 @@ interface Props {
   id: string
   fields: Array<TableColumnProps>
   route?: string
+  modalId?: string
   onSubmit?: (data: any) => void
+  afterSubmit?: (data: any) => void
 }
 
 
@@ -22,9 +24,10 @@ interface Props {
 function CRUDForm({
   route,
   fields,
-  // values,
-  onSubmit,
   id,
+  modalId,
+  onSubmit,
+  afterSubmit,
 }: Props) {
   if (!route && !onSubmit) {
     throw new Error('CRUDForm requires either a route or an onSubmit method!');
@@ -37,13 +40,14 @@ function CRUDForm({
     const uri = method === 'POST' ? route : `${route}/${data.pk}`;
     // if onSubmit, use that method, otherwise send data to route
     if (onSubmit) return onSubmit(data);
-    closeModal(id);
+    if (modalId) closeModal(modalId);
     fetchServer(
       uri,
       {
         payload: data,
         method: method,
-      }
+        onSuccess: afterSubmit,
+      },
     )
   }
 

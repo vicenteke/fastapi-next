@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { getToken } from "@/lib/token.js";
+import { getToken } from "@/lib/token";
 
 
 export type Props = React.PropsWithChildren<{

@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Button from "./Button";
 import { setToken } from "@/lib/token";
-import fetchServer from "@/lib/fetch.js";
+import fetchServer from "@/lib/fetch";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 
