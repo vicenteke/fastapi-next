@@ -37,13 +37,8 @@ export default function LoginForm({ redirect=true, onLogin }: Props) {
         if (redirect) {
             if (typeof redirectRoute !== 'string') router.back();
             else router.replace(redirectRoute);
+            if (onLogin) onLogin();
         }
-        setTimeout(
-            () => {
-                window.location.reload();
-                if (onLogin) onLogin();
-            }, 300  // Delaying so router can complete its navigation
-        )
     }
 
     const onSubmit = (event: React.MouseEvent<HTMLElement>) => {

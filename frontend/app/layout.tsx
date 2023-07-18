@@ -1,6 +1,5 @@
 import '@/styles/globals.sass';
 import Script from 'next/script';
-import Navbar from '@/components/Navbar';
 import Alert from '@/components/Alert';
 
 export const metadata = {
@@ -22,13 +21,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           An error occurred while trying to fetch your data.
         </Alert>
-        <Navbar id='main-navbar'/>
-        <br />
-        <main>
-          <section className="section">
-            {children}
-          </section>
-        </main>
+        {children}
         <Script src='/bulma.js'/>
       </body>
     </html>
