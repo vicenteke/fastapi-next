@@ -66,8 +66,7 @@ function Icon({
   return (
     <span
       className={classNames.join(" ")}
-      style={{width: '100% !important',
-      height: 'auto', ...style}}
+      style={{width: '100% !important', ...style}}
       {...props}
       >
       <FontAwesomeIcon icon={icon} className={iconClassNames.join(' ')} width="100%" />

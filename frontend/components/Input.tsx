@@ -25,6 +25,8 @@ export interface Props extends React.ComponentPropsWithoutRef<'input'> {
   errorText?: string
   iconLeft?: React.ReactNode | IconDefinition
   iconRight?: React.ReactNode | IconDefinition
+  controlClassNames?: string
+  fieldClassNames?: string
 };
 
 
@@ -54,6 +56,8 @@ function Input({
   errorText,
   iconLeft,
   iconRight,
+  controlClassNames,
+  fieldClassNames,
   ...props
 }: Props) {
   if (type === 'none')
@@ -84,6 +88,7 @@ function Input({
   if (props.readOnly) inputClasses.push('is-static');
   
   let controlClasses = ['control'];
+  if (controlClassNames) controlClasses.push(controlClassNames);
   if (iconLeft) controlClasses.push('has-icons-left');
   if (iconRight) controlClasses.push('has-icons-right');
   if (inputSize) {
@@ -99,7 +104,7 @@ function Input({
   }
 
   return (
-    <div className="field">
+    <div className={"field " + fieldClassNames}>
       {label && <label className="label">{label}</label>}
       <div className={controlClasses.join(' ')}>
         <input

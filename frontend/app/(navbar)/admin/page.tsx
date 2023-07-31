@@ -6,6 +6,7 @@ import Button from '@/components/Button';
 import Icon from '@/components/Icon';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import CRUD from '@/components/CRUD';
+import Select from '@/components/Select';
 
 
 export default function Home() {
@@ -35,7 +36,21 @@ export default function Home() {
         <Button href='/'>
           Home
         </Button>
+        <br />
 
+        <Select
+          multiple
+          color='primary'
+          inputSize='small'
+          label='Hello'
+          state='loading'
+          helpText='This is a select'
+          errorText='YOU BASTARD'
+          successText='Love U S2'
+          iconLeft={faUser}
+        />
+
+        <br />
         <CRUD
           route='/permissions'
           useDropup

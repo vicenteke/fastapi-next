@@ -1,0 +1,4 @@
+/home/vicente/.nvm/versions/node/v20.2.0/lib
+├── corepack@0.17.2
+└── npm@9.6.6
+
