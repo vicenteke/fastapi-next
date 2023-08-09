@@ -7,6 +7,7 @@ import Icon from '@/components/Icon';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import CRUD from '@/components/CRUD';
 import Select from '@/components/Select';
+import SelectTest from '@/components/SelectTest';
 
 
 export default function Home() {
@@ -38,7 +39,7 @@ export default function Home() {
         </Button>
         <br />
 
-        <Select
+        {/* <Select
           multiple
           color='primary'
           inputSize='small'
@@ -48,6 +49,17 @@ export default function Home() {
           errorText='YOU BASTARD'
           successText='Love U S2'
           iconLeft={faUser}
+        /> */}
+
+        <SelectTest
+          options={[
+            {label: 'First option', value: 1},
+            {label: 'Second option', value: 2},
+            {label: 'Third option', value: 3},
+            {label: 'Fourth option', value: 4},
+            {label: 'Fifth option', value: 5},
+            {label: 'Sixth option', value: 6},
+          ]}
         />
 
         <br />
