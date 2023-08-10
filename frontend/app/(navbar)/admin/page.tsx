@@ -6,6 +6,7 @@ import Button from '@/components/Button';
 import Icon from '@/components/Icon';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import CRUD from '@/components/CRUD';
+import TableCRUD from '@/components/TableCRUD';
 import Select from '@/components/Select';
 import SelectTest from '@/components/SelectTest';
 
@@ -63,7 +64,28 @@ export default function Home() {
         />
 
         <br />
-        <CRUD
+        {/* <CRUD
+          route='/permissions'
+          useDropup
+          header={[
+            {
+              name: '#',
+              tableColumn: 'pk',
+              type: 'hidden',
+            },
+            {
+              name: 'Name',
+              tableColumn: 'name',
+              type: 'text'
+            },
+            {
+              name: 'Description',
+              tableColumn: 'description',
+              type: 'text'
+            },
+          ]}
+        /> */}
+        <TableCRUD
           route='/permissions'
           useDropup
           header={[

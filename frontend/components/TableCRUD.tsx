@@ -1,5 +1,4 @@
 "use client";
-// TODO: implement this as a base class for "CRUDing". Adapt TableCRUD accordingly
 
 import { useState, useEffect } from 'react';
 import Button from './Button';
