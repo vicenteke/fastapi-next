@@ -1,0 +1,75 @@
+@import "variables";
+
+:where(.selectItem) {
+    &:hover {
+        background: $grey-lightest;
+        cursor: pointer;
+    }
+}
+
+.primary {
+    &:hover:not(.primaryActive) {
+        background: $primary-light;
+    }
+}
+
+.primaryActive {
+    background: $primary;
+    color: $white;
+}
+
+.link {
+    &:hover:not(.linkActive) {
+        background: $link-light;
+    }
+}
+
+.linkActive {
+    background: $link;
+    color: $white;
+}
+
+.info {
+    &:hover:not(.infoActive) {
+        background: $info-light;
+    }
+}
+
+.infoActive {
+    background: $info;
+    color: $white;
+}
+
+.success {
+    &:hover:not(.successActive) {
+        background: $success-light;
+    }
+}
+
+.successActive {
+    background: $success;
+    color: $white;
+}
+
+.warning {
+    &:hover:not(.warningActive) {
+        background: $warning-light;
+    }
+}
+
+.warningActive {
+    background: $warning;
+    color: $black;
+}
+
+.danger {
+    &:hover:not(.dangerActive) {
+        background: $danger-light;
+    }
+}
+
+.dangerActive {
+    background: $danger;
+    color: $white;
+}
+        

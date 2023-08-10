@@ -1,4 +1,4 @@
-import '@/styles/globals.sass';
+import '@/styles/globals.scss';
 import Script from 'next/script';
 import Alert from '@/components/Alert';
 

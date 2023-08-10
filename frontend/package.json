@@ -26,6 +26,6 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "sass": "^1.63.2"
+    "sass": "^1.65.1"
   }
 }

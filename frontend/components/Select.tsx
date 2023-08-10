@@ -2,11 +2,13 @@
 
 // TODO: implement other types of input, including select, radio, checkbox
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Icon from "./Icon";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import useSelect, { optionItem } from "@/hooks/select";
 import Input from "./Input";
+import SelectItem from "./SelectItem";
 import {
   BulmaColors,
   BulmaSizes,
@@ -17,6 +19,7 @@ import {
 
 // export interface Props extends React.ComponentPropsWithoutRef<'select'> {
 export interface Props {
+  options: Array<optionItem>
   multiple?: boolean
   color?: BulmaColors
   inputSize?: BulmaSizes
@@ -27,6 +30,7 @@ export interface Props {
   successText?: string
   errorText?: string
   iconLeft?: React.ReactNode | IconDefinition
+  enableNewValues?: boolean
 };
 
 
@@ -121,6 +125,7 @@ export interface Props {
 // }
 
 function Select({
+  options,
   multiple,
   color,
   inputSize,
@@ -131,62 +136,60 @@ function Select({
   successText,
   errorText,
   iconLeft,
+  enableNewValues,
   // onChange,
   ...props
 }: Props) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [values, setValues] = useState<any>(multiple ? Array() : '');
   const [inputText, setInputText] = useState<string>('');
+  const {
+    value,
+    setValue,
+    filteredOptions,
+    setFilteredOptions,
+    onSelect,
+    onFilterLabel,
+    onFilterValue,
+    onFilterAll,
+  } = useSelect({options, isMulti: multiple, enableNewValues});
 
-  const handleChange = (value: any) => {
-    // Toggles 'value' inside 'values'
-    // if (onChange)
-    //   onChange(values)
-    if (!multiple) {
-      setValues(value);
-      return
-    }
-
-    let newValues = Array();
-    let shouldInclude = true;
-    for (let val of values) {
-      if (val === value) shouldInclude = false
-      else newValues.push(val);
-    }
-
-    if (shouldInclude) newValues.push(value);
-    setValues(newValues);
-  }
+  useEffect(() => {
+    onFilterLabel(inputText);
+  }, [inputText])
 
   return (
     <div className='block'>
+      <div>
+        Value(s): {value && Array.isArray(value) ? value.map((item) => item.value).join(', ') : value!.value}
+      </div>
       <Input type='text' iconRight={isOpen ? faChevronUp : faChevronDown}
         onFocus={() => setIsOpen(true)}
         onBlur={() => setIsOpen(false)}
         controlClassNames="mb-0"
         fieldClassNames="mb-0"
         onChange={(e) => setInputText(e.target.value)}
+        onKeyDown={(e) => {
+          if (enableNewValues && e.key === 'Enter')
+            onSelect({label: inputText, value: inputText})
+        }}
         value={inputText}
       />
-      <div className={isOpen ? "dropdown is-active" : "dropdown"}>
-        <div className="dropdown-menu" id="dropdown-menu" role="menu">
+      <div className={isOpen ? "dropdown is-active is-hoverable" : "dropdown is-hoverable"}>
+        <div className="dropdown-menu" role="select">
           <div className="dropdown-content">
-            <a href="#" className="dropdown-item">
-              Dropdown item
-            </a>
-            <a className="dropdown-item">
-              Other dropdown item
-            </a>
-            <a href="#" className="dropdown-item is-active">
-              Active dropdown item
-            </a>
-            <a href="#" className="dropdown-item">
-              Other dropdown item
-            </a>
-            <hr className="dropdown-divider" />
-            <a href="#" className="dropdown-item">
-              With a divider
-            </a>
+            {filteredOptions.map((option, index) => (
+              <SelectItem
+                option={option}
+                key={index}
+                onSelect={onSelect}
+                color={color}
+                isActive={
+                  Array.isArray(value) ?
+                  value.some((val) => JSON.stringify(val) === JSON.stringify(option))
+                  : JSON.stringify(value) === JSON.stringify(option)
+                }
+              />
+              ))}
           </div>
         </div>
       </div>
