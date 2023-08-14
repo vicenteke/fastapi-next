@@ -12,7 +12,7 @@ export type Props = React.PropsWithChildren<{
  *              (e.g. buttons and anchors). Also, if you want to group multiple
  *              tag groups (with add-ons), you should use the TagsGroup component.
  *
- * Props (also includes NextImage props):
+ * Props:
  * - size?: tags size;
  * - hasAddons?: tags will be attached to each other;
  * 

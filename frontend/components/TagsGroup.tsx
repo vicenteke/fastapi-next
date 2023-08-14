@@ -9,7 +9,7 @@ export type Props = React.PropsWithChildren<{
  *              when you have several Tags with add-ons. Check Bulma's Tag
  *              documentation for a clearer explanation.
  *
- * Props (also includes NextImage props):
+ * Props:
  * - size?: tags size;
  * - hasAddons?: tags will be attached to each other;
  */

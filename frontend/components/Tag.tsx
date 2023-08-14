@@ -13,12 +13,13 @@ export type Props = React.PropsWithChildren<{
 
 /* Description: implementation of Bulma's Tag component.
  *
- * Props (also includes NextImage props):
- * - title?: if it's a title;
- * - subtitle?: if it's a subtitle;
- * - size?: text size (from 1 to 6);
- * - isSpaced?: whether to include some spacing after the text or not;
- * - useHeadingTags?: whether to use h1, h2, h3... tags or the p tag;
+ * Props:
+ * - light?: if the color should be a lighter shade;
+ * - color?: tag color;
+ * - size?: tag size;
+ * - isRounded?: if the corners should be rounded;
+ * - isDelete?: if it should be a delete tag ('X' tag);
+ * - htmlTag?: which HTML tag to use (defaults to span);
  */
 function Tag({
   isRounded,

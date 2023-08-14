@@ -82,7 +82,7 @@ export function bulmaModalTriggerJS(triggerElementId) {
     openModal($target);
   }
   triggerElement.addEventListener('click', listener);
-  return [[triggerElement, listener]]
+  return [[triggerElement, listener]];
 }
 
 export function bulmaModalJS(modalId) {
@@ -99,8 +99,24 @@ export function bulmaModalJS(modalId) {
   elements.forEach(($close) => {
     const $target = $close.closest('.modal');
     const listener = () => closeModal($target);
-    listenerList.push([$close, listener])
+    listenerList.push([$close, listener]);
     $close.addEventListener('click', listener);
   });
+  return listenerList;
+}
+
+// NOTIFICATION ---------------------------------------------------------------------
+export function bulmaNotificationJS(notificationId) {
+  let listenerList = [];
+  const $delete = document.querySelector(`#${notificationId}.notification .delete`);
+  if (!$delete) return [];
+  const $notification = $delete.parentNode;
+  if (!$notification) return [];
+
+  const listener = () => {
+    $notification.parentNode.removeChild($notification);
+  };
+  listenerList.push([$delete, listener]);
+  $delete.addEventListener('click', listener);
   return listenerList;
 }

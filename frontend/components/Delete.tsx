@@ -1,14 +1,13 @@
 import React from "react";
 import { BulmaSizes } from "@/constants/types";
 
-export interface Props {
-  className?: string
+export interface Props extends React.ComponentPropsWithoutRef<'button'> {
   size?: BulmaSizes
 };
 
 /* Description: implementation of Bulma's Delete component
  *
- * Props (also includes NextImage props):
+ * Props:
  * - size?: tags size;
  */
 function Delete({

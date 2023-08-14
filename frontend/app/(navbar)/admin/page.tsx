@@ -5,6 +5,8 @@ import Button from '@/components/Button';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import TableCRUD from '@/components/TableCRUD';
 import Select from '@/components/Select';
+import Notification from '@/components/Notification';
+import ProgressBar from '@/components/ProgressBar';
 
 
 export default function Home() {

@@ -4,7 +4,6 @@
  */
 
 import { ItemProps } from "./NavbarLinks";
-import Button from "./Button";
 import LogoutButton from "./LogoutButton";
 
 export const leftMenu: Array<ItemProps> = [
