@@ -97,10 +97,10 @@ function Input({
   }
 
   if (iconLeft && !React.isValidElement(iconLeft)) {
-    iconLeft = <Icon icon={iconLeft} isLeft size='small'/>
+    iconLeft = <Icon icon={iconLeft!} isLeft size='small'/>
   }
   if (iconRight && !React.isValidElement(iconRight)) {
-    iconRight = <Icon icon={iconRight} isRight size='small'/>
+    iconRight = <Icon icon={iconRight!} isRight size='small'/>
   }
 
   return (
@@ -114,7 +114,6 @@ function Input({
           onChange={handleChange}
           {...props}
         />
-        {}
         {!!iconLeft && iconLeft}
         {!!iconRight && iconRight}
       </div>

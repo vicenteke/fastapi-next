@@ -4,7 +4,7 @@ import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export interface IconProps extends React.ComponentPropsWithoutRef<'span'> {
-  icon: IconDefinition;
+  icon: IconDefinition | string;
   size?: BulmaSizes;
   color?: BulmaColors;
   animation?: 'spin' | 'pulse';
