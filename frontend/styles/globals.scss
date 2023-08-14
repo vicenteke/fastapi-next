@@ -5,7 +5,7 @@ html {
   overflow: auto;
 }
 
-button {
+button:not(.delete) {
   white-space: normal !important;
   &:not(.full-height) {
     height: auto !important;

@@ -9,7 +9,7 @@ export type Props = React.PropsWithChildren<{
   useHeadingTags?: boolean
 }>;
 
-/* Description: basic typography component
+/* Description: basic typography component.
  *
  * Props (also includes NextImage props):
  * - title?: if it's a title;
