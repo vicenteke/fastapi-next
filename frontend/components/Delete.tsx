@@ -8,7 +8,7 @@ export interface Props extends React.ComponentPropsWithoutRef<'button'> {
 /* Description: implementation of Bulma's Delete component
  *
  * Props:
- * - size?: tags size;
+ * - size?: button size;
  */
 function Delete({
   size,

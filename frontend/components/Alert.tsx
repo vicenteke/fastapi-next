@@ -10,6 +10,8 @@ import {
   faInfoCircle,
 } from '@fortawesome/free-solid-svg-icons';
 import Button from './Button';
+import Column from './Column';
+import Columns from './Columns';
 import Icon from './Icon';
 import styles from "@/styles/Alert.module.scss";
 
@@ -109,39 +111,39 @@ function Alert({
         <div className="card">
           <div className="card-content">
             {icon &&
-            <div className='columns is-centered is-vcentered my-2'>
-              <div className='column is-5 level mb-2'>
+            <Columns center vCenter className='my-2'>
+              <Column size={5} className='level mb-2'>
                 <Icon
                   icon={iconSymbol}
                   color={icon}
                   size='large'
                   className={`level-item ${styles.icon}`}
                   iconSize={6}/>
-              </div>
-            </div>
+              </Column>
+            </Columns>
             }
             {title && <p className="title has-text-centered">{title}</p>}
             <div className='modal-children'>{children}</div>
-            <div className='columns is-vcentered mt-4 is-multiline'>
+            <Columns multiline vCenter className='mt-4'>
               {cancel &&
-                <div className='column'>
+                <Column>
                   <Button color='normal' onClick={handleConfirm} isFullWidth>
                     {cancel}
                   </Button>
-                </div>
+                </Column>
               }
               {confirm &&
-                <div className='column'>
+                <Column>
                   <Button
                     color={alertTypeToBulmaColor(type)}
                     onClick={handleCancel}
                     isFullWidth
-                  >
+                    >
                     {confirm}
                   </Button>
-                </div>
+                </Column>
               }
-            </div>
+            </Columns>
           </div>
         </div>
       </div>
