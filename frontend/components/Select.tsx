@@ -9,6 +9,7 @@ import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import useSelect, { optionItem } from "@/hooks/select";
 import Input from "./Input";
 import SelectItem from "./SelectItem";
+import Block from "./Block";
 import {
   BulmaColors,
   BulmaSizes,
@@ -158,7 +159,7 @@ function Select({
   }, [inputText])
 
   return (
-    <div className='block'>
+    <Block>
       <div>
         Value(s): {value && Array.isArray(value) ? value.map((item) => item.value).join(', ') : value!.value}
       </div>
@@ -193,7 +194,7 @@ function Select({
           </div>
         </div>
       </div>
-    </div>
+    </Block>
   )
 }
 

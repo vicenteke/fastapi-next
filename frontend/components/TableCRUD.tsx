@@ -9,6 +9,7 @@ import CRUDForm from './CRUDForm';
 import { faPencil, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import Modal from './Modal';
 import ModalButton from './ModalButton';
+import Block from './Block';
 
 import useCRUD, { Props as CRUDProps, TableColumnProps } from '@/hooks/crud';
 import { clearCRUDFormData } from '@/lib/crud';
@@ -124,7 +125,7 @@ function TableCRUD({
     buildTableBody(body);
   }, [body]);
 
-  return (<div className='block'>
+  return (<Block>
     <Modal id={modalId}>
       <CRUDForm
         fields={header}
@@ -154,7 +155,7 @@ function TableCRUD({
       setPerPage={setPerPage}
       useDropup={useDropup}
     />}
-  </div>)
+  </Block>)
 }
 
 export default TableCRUD;

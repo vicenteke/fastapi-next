@@ -1,11 +1,12 @@
 "use client";
 
-import { TableColumnProps } from "./CRUD";
+import { TableColumnProps } from "@/hooks/crud";
 import Button from "./Button";
 import Input from "./Input";
 import fetchServer from "@/lib/fetch";
 import { getCRUDFormData } from "@/lib/crud";
 import { closeModal } from "@/lib/bulma";
+import Block from "./Block";
 
 
 interface Props {
@@ -51,7 +52,7 @@ function CRUDForm({
     )
   }
 
-  return <div className="block" id={id}>
+  return <Block id={id}>
     <Input
       key={10000}
       name='method'
@@ -74,7 +75,7 @@ function CRUDForm({
       />;
     })}
     <Button onClick={handleSubmit} isFullWidth>Save</Button>
-  </div>
+  </Block>
 }
 
 export default CRUDForm;

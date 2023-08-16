@@ -1,4 +1,5 @@
 import React from "react";
+import Block from "./Block";
 
 interface Props extends React.ComponentPropsWithoutRef<'nav'> {
   totalPages: number
@@ -43,7 +44,7 @@ function Pagination({
 }: Props) {
 
   if (totalPages < 2)
-    return <div className="block"></div>
+    return <Block></Block>
 
   let classNames = [className, 'pagination', 'is-left'];
   if (isRounded) classNames.push('is-rounded');
