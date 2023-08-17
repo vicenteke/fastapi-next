@@ -13,7 +13,7 @@ export type Props = React.PropsWithChildren<{
  * Props:
  * - htmlTag?: the HTML tag (default: footer);
  */
-const MediaObjectContent: React.FunctionComponent<Props & React.HTMLAttributes<HTMLOrSVGElement>> = ({
+const Footer: React.FunctionComponent<Props & React.HTMLAttributes<HTMLOrSVGElement>> = ({
   htmlTag: Tag = 'footer',
   className,
   children,
@@ -27,4 +27,4 @@ const MediaObjectContent: React.FunctionComponent<Props & React.HTMLAttributes<H
   </Tag>;
 }
 
-export default MediaObjectContent;
+export default Footer;

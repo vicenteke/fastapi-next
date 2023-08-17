@@ -14,7 +14,7 @@ export type Props = React.PropsWithChildren<{
  * - htmlTag?: the HTML tag (default: section);
  * - size?: changes spaing;
  */
-const Hero: React.FunctionComponent<Props & React.HTMLAttributes<HTMLOrSVGElement>> = ({
+const Section: React.FunctionComponent<Props & React.HTMLAttributes<HTMLOrSVGElement>> = ({
   htmlTag: Tag = 'section',
   size,
   className,
@@ -30,4 +30,4 @@ const Hero: React.FunctionComponent<Props & React.HTMLAttributes<HTMLOrSVGElemen
   </Tag>;
 }
 
-export default Hero;
+export default Section;
