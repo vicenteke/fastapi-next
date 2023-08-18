@@ -91,7 +91,7 @@ export function bulmaModalJS(modalId) {
   const elements = document.querySelectorAll(
     `#${modalId} .modal-background,
      #${modalId} .modal-close,
-     #${modalId} .modal-card-head .delete,
+     #${modalId} .delete,
      #${modalId} .modal-card-foot .button`
     ) || [];
 

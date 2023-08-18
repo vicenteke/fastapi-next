@@ -12,6 +12,7 @@ import {
 import Button from './Button';
 import Column from './Column';
 import Columns from './Columns';
+import Delete from './Delete';
 import Icon from './Icon';
 import styles from "@/styles/Alert.module.scss";
 
@@ -110,6 +111,9 @@ function Alert({
       <div className={`modal-content ${styles.modalContent}`}>
         <div className="card">
           <div className="card-content">
+            <div className="has-text-right" style={{ width: '100%' }}>
+              <Delete/>
+            </div>
             {icon &&
             <Columns center vCenter className='my-2'>
               <Column size={5} className='level mb-2'>
@@ -147,7 +151,6 @@ function Alert({
           </div>
         </div>
       </div>
-      <button className="modal-close is-large" aria-label="close"></button>
     </div>
   )
 }

@@ -2,6 +2,8 @@
 
 import React, { useEffect } from "react";
 import { bulmaModalJS, clearClickEventListeners } from '@/lib/bulma.js'
+import Delete from "./Delete";
+import Container from "./Container";
 
 type Props = React.PropsWithChildren<{
   id: string;
@@ -24,12 +26,15 @@ function Modal({ children, id }: Props) {
       <div className="modal-background"></div>
       <div className="modal-content">
         <div className="card">
+              {/* <button className="modal-close is-large" aria-label="close"></button> */}
           <div className="card-content">
+            <div className="has-text-right" style={{ width: '100%' }}>
+              <Delete/>
+            </div>
             {children}
           </div>
         </div>
       </div>
-      <button className="modal-close is-large" aria-label="close"></button>
     </div>
   )
 }
