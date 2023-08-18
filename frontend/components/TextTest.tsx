@@ -1,14 +1,13 @@
 import React from "react";
-import { BulmaTextSize } from "@/constants/types";
+import { BulmaTextSize, WrapperProps } from "@/constants/types";
 
-export type Props = React.PropsWithChildren<{
-  className?: string
+export type Props = WrapperProps & {
   title?: boolean
   subtitle?: boolean
   size?: BulmaTextSize | BulmaTextSize[]
   isSpaced?: boolean
   useHeadingTags?: boolean
-}>;
+};
 
 /* Description: basic typography component.
  *
