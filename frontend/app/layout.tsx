@@ -1,6 +1,8 @@
 import '@/styles/globals.scss';
 import Script from 'next/script';
-import Alert from '@/components/Alert';
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
+import { Experimental_CssVarsProvider as CssVarsProvider } from '@mui/material/styles';
+import theme from '../theme';
 
 export const metadata = {
   title: "Vicenteke's Base",
@@ -10,19 +12,24 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  // TODO: include root modals
   return (
     <html lang="pt-br">
       <body className='has-navbar-fixed-top'>
-        <Alert
+        {/* <Alert
           id='fetch-server-error-modal'
           type='danger'
           title='Oops...'
           cancel='OK'
         >
           An error occurred while trying to fetch your data.
-        </Alert>
-        {children}
-        <Script src='/bulma.js'/>
+        </Alert> */}
+        <AppRouterCacheProvider>
+          <CssVarsProvider theme={theme}>
+            {children}
+          </CssVarsProvider>
+        </AppRouterCacheProvider>
+        {/* <Script src='/bulma.js'/> */}
       </body>
     </html>
   )

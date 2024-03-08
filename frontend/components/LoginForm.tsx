@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import Button from "./Button";
+// import Button from "./Button";
 import { setToken } from "@/lib/token";
 import fetchServer from "@/lib/fetch";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -23,6 +23,7 @@ interface Props {
  * - onLogin: method to be executed after login;
  */
 export default function LoginForm({ redirect=true, onLogin }: Props) {
+    // TODO
     const loginRoute = '/token';
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
@@ -96,13 +97,13 @@ export default function LoginForm({ redirect=true, onLogin }: Props) {
         </div>
         <div className="field">
             <p className="control">
-                <Button
+                {/* <Button
                     type="submit"
                     onClick={(e) => onSubmit(e)}
                     isLoading={loading}
-                >
+                > */}
                     Login
-                </Button>
+                {/* </Button> */}
             </p>
         </div>
     </div>)

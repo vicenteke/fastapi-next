@@ -39,6 +39,7 @@ function Table({
   isFullwidth=true,
   ...props
 }: Props) {
+  // TODO
   let classNames = [className, 'table'];
   if (isBordered) classNames.push('is-bordered');
   if (isStriped) classNames.push('is-striped');

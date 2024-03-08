@@ -1,12 +1,9 @@
 "use client";
 
 import { TableColumnProps } from "@/hooks/crud";
-import Button from "./Button";
 import Input from "./Input";
 import fetchServer from "@/lib/fetch";
 import { getCRUDFormData } from "@/lib/crud";
-import { closeModal } from "@/lib/bulma";
-import Block from "./Block";
 
 
 interface Props {
@@ -30,6 +27,7 @@ function CRUDForm({
   onSubmit,
   afterSubmit,
 }: Props) {
+  // TODO
   if (!route && !onSubmit) {
     throw new Error('CRUDForm requires either a route or an onSubmit method!');
   }
@@ -41,7 +39,7 @@ function CRUDForm({
     const uri = method === 'POST' ? route : `${route}/${data.pk}`;
     // if onSubmit, use that method, otherwise send data to route
     if (onSubmit) return onSubmit(data);
-    if (modalId) closeModal(modalId);
+    // if (modalId) closeModal(modalId);
     fetchServer(
       uri,
       {
@@ -52,7 +50,7 @@ function CRUDForm({
     )
   }
 
-  return <Block id={id}>
+  return <div id={id}>
     <Input
       key={10000}
       name='method'
@@ -74,8 +72,8 @@ function CRUDForm({
         {...entry.inputProps}
       />;
     })}
-    <Button onClick={handleSubmit} isFullWidth>Save</Button>
-  </Block>
+    {/* <Button onClick={handleSubmit} isFullWidth>Save</Button> */}
+  </div>
 }
 
 export default CRUDForm;

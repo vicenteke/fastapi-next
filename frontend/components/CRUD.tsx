@@ -2,15 +2,9 @@
 // TODO: implement this as a base class for "CRUDing". Adapt TableCRUD accordingly
 
 import { useState, useEffect } from 'react';
-import Button from './Button';
 import Table from './Table';
-import Icon from './Icon';
 import CRUDPagination from './CRUDPagination';
 import CRUDForm from './CRUDForm';
-import { faPencil, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
-import Modal from './Modal';
-import ModalButton from './ModalButton';
-import Block from './Block';
 
 import useCRUD, { Props as CRUDProps, TableColumnProps } from '@/hooks/crud';
 import { clearCRUDFormData } from '@/lib/crud';
@@ -35,6 +29,7 @@ function TableCRUD({
   useDropup,
   noPagination
 }: Props) {
+  // TODO
   const [tableBody, setTableBody] = useState<Array<Array<React.ReactNode | string | null>>>([]);
 
   const {
@@ -64,7 +59,7 @@ function TableCRUD({
 
     data_.method = 'PUT';
     return (<>
-      <Button
+      {/* <Button
         color='danger'
         onClick={() => {
           deleteEntry(data_);
@@ -80,7 +75,7 @@ function TableCRUD({
         }}
       >
         <Icon icon={faPencil}/>
-      </ModalButton>
+      </ModalButton> */}
     </>)
   }
 
@@ -126,8 +121,8 @@ function TableCRUD({
     buildTableBody(body);
   }, [body]);
 
-  return (<Block>
-    <Modal id={modalId}>
+  return (<>
+    {/* <Modal id={modalId}> */}
       <CRUDForm
         fields={header}
         route={route}
@@ -135,10 +130,10 @@ function TableCRUD({
         modalId={modalId}
         afterSubmit={() => loadData()}
       />
-    </Modal>
-    <ModalButton target={modalId} className='mb-1' onClick={() => clearCRUDFormData(formId)}>
+    {/* </Modal> */}
+    {/* <ModalButton target={modalId} className='mb-1' onClick={() => clearCRUDFormData(formId)}>
       <Icon icon={faPlus} />
-    </ModalButton>
+    </ModalButton> */}
     <Table
         header={tableHeaderWithExtraColumns}
         body={tableBody}
@@ -156,7 +151,7 @@ function TableCRUD({
       setPerPage={setPerPage}
       useDropup={useDropup}
     />}
-  </Block>)
+  </>)
 }
 
 export default TableCRUD;

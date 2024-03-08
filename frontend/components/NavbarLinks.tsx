@@ -71,6 +71,7 @@ type Props = React.PropsWithChildren<{
  * }];
  */
 function NavbarLinks({ items, isTransparent }: Props) {
+    // TODO
     const pathname = usePathname();
     const dropdownClasses = isTransparent ? "navbar-dropdown is-boxed" : "navbar-dropdown";
 

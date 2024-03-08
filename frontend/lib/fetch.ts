@@ -1,5 +1,4 @@
 import { getToken } from './token';
-import { openModal, setModalTitle, setModalContent } from './bulma.js';
 
 /* Description: method used to fetch the server
  * Parameters:
@@ -26,8 +25,9 @@ export default async function fetchServer(
         if (onError)
             onError(error);
         if (useErrorModal) {
-            setModalContent(errorModalName, error);
-            openModal(errorModalName);
+            // TODO
+            // setModalContent(errorModalName, error);
+            // openModal(errorModalName);
         }
     }
 

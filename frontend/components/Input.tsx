@@ -3,7 +3,6 @@
 // TODO: implement other types of input, including select, radio, checkbox
 
 import React, { useState } from "react";
-import Icon from "./Icon";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import {
   BulmaColors,
@@ -60,6 +59,7 @@ function Input({
   fieldClassNames,
   ...props
 }: Props) {
+  // TODO
   if (type === 'none')
     return <></>
 
@@ -96,12 +96,12 @@ function Input({
     controlClasses.push(`is-${inputSize}`);
   }
 
-  if (iconLeft && !React.isValidElement(iconLeft)) {
-    iconLeft = <Icon icon={iconLeft!} isLeft size='small'/>
-  }
-  if (iconRight && !React.isValidElement(iconRight)) {
-    iconRight = <Icon icon={iconRight!} isRight size='small'/>
-  }
+  // if (iconLeft && !React.isValidElement(iconLeft)) {
+  //   iconLeft = <Icon icon={iconLeft!} isLeft size='small'/>
+  // }
+  // if (iconRight && !React.isValidElement(iconRight)) {
+  //   iconRight = <Icon icon={iconRight!} isRight size='small'/>
+  // }
 
   return (
     <div className={"field " + fieldClassNames}>
@@ -114,8 +114,8 @@ function Input({
           onChange={handleChange}
           {...props}
         />
-        {!!iconLeft && iconLeft}
-        {!!iconRight && iconRight}
+        {/* {!!iconLeft && iconLeft}
+        {!!iconRight && iconRight} */}
       </div>
       {helpText && validation === null &&
         <p className="help">{helpText}</p>

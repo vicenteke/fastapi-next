@@ -1,5 +1,4 @@
 import NextImage from "next/image";
-import Block from "./Block";
 
 interface Props extends React.ComponentProps<typeof NextImage> {
   title?: string
@@ -26,15 +25,16 @@ function Image({
   placeholder="blur",   // Loads a blur version of the image
   ...props
 }: Props) {
+  // TODO
   return (
-  <Block>
+  <>
     {title && <div className="py-4 has-text-centered is-size-4">{title}</div>}
     <NextImage
       placeholder={placeholder}
       {...props}
     />
     {caption && <div className="py-2 has-text-centered has-text-weight-light">{caption}</div>}
-  </Block>)
+  </>)
 }
 
 export default Image;

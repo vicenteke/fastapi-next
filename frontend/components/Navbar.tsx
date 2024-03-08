@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
-import { bulmaNavbarJS, clearClickEventListeners } from '@/lib/bulma.js'
+import React from "react";
 
 import NavbarLinks from "./NavbarLinks";
 import { NavbarProps } from "@/constants/types";
@@ -28,6 +27,7 @@ function Navbar({
   hasShadow=false,
   ...props
 }: NavbarProps) {
+  // TODO
   let classNames = [className, "navbar"];
   if (typeof color === 'string') classNames.push("is-" + color)
   if (isFixedTop) classNames.push("is-fixed-top")
@@ -36,16 +36,6 @@ function Navbar({
   if (hasShadow) classNames.push("has-shadow")
   const burgerId = `${id}-burger`;
   const targetMenuId = `${id}-burger-target`;
-
-  useEffect(() => {
-    // Adding required JS
-    const listeners = bulmaNavbarJS(burgerId);
-
-    // Clearing event listeners
-    return () => {
-      clearClickEventListeners(listeners);
-    }
-  }, [])
 
   return (
     <nav className={classNames.join(" ")} id={id} role="navigation"

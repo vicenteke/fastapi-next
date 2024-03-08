@@ -3,7 +3,6 @@
 import React from "react";
 import { ButtonProps } from '@/constants/types'
 import { deleteToken } from "@/lib/token";
-import Button from "./Button";
 
 
 /* Description: just a logout button. It implements the same Button interface.
@@ -13,6 +12,7 @@ function LogoutButton({
   onClick,
   ...props
 }: ButtonProps) {
+  // TODO
   function handleClick(event: React.MouseEvent<HTMLButtonElement>): void {
     deleteToken();
     if (onClick)
@@ -20,10 +20,10 @@ function LogoutButton({
     window.location.reload();
   }
 
-  return (
-    <Button {...props} onClick={handleClick}>
-      {children || 'Logout'}
-    </Button>
+  return (<></>
+    // <Button {...props} onClick={handleClick}>
+    //   {children || 'Logout'}
+    // </Button>
   )
 }
 

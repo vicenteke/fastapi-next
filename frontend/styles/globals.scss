@@ -1,5 +1,6 @@
+// TODO
+
 @import "variables";
-@import "../node_modules/bulma/bulma.sass";
 
 html {
   overflow: auto;
@@ -10,16 +11,11 @@ button:not(.delete) {
   &:not(.full-height) {
     height: auto !important;
   }
-  &:not(.modal-close) {
-    @extend .button;
-  }
+  // &:not(.modal-close) {
+  //   @extend .button;
+  // }
 }
 
-:where(h1, h2, h3, h4, h5, h6):not(:is(.title, .subtitle)) {
-  font-weight: $content-heading-weight;
-  line-height: $content-heading-line-height;
-  color: $content-heading-color;
-}
 h1:not(:is(.title, .subtitle)) {
   font-size: 2em;
   margin-bottom: 0.5em;
@@ -54,9 +50,9 @@ h6:not(:is(.title, .subtitle)) {
   margin-bottom: 1em;
 }
 
-input {
-  @extend .input;
-}
+// input {
+//   @extend .input;
+// }
 
 @mixin scrollbars($size, $foreground-color, $background-color: mix($foreground-color, white,  50%)) {
   // For Google Chrome
@@ -101,12 +97,12 @@ input {
   background: rgba(10, 10, 10, 0.5);
 }
 
-.pagination-list {
-  @include touch {
-    width: calc(100% - 4em);
-    margin: 1em 2em;
-  }
-}
+// .pagination-list {
+//   @include touch {
+//     width: calc(100% - 4em);
+//     margin: 1em 2em;
+//   }
+// }
 
 .full-height {
   height: 100% !important;

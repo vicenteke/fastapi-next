@@ -1,184 +1,186 @@
+// TODO
+
 // Use this file to configure Bulma params through its variables
 // It's possible to import this file in any SASS module to access such variables
 
-@use "../node_modules/bulma/sass/utilities/derived-variables.sass" as bulma;
+// @use "../node_modules/bulma/sass/utilities/derived-variables.sass" as bulma;
 
-// $primary: #d37bb9 !default;
-$primary: bulma.$primary !default;
+// // $primary: #d37bb9 !default;
+// $primary: bulma.$primary !default;
 
-$info: bulma.$info !default;
-$success: bulma.$success !default;
-$warning: bulma.$warning !default;
-$danger: bulma.$danger !default;
+// $info: bulma.$info !default;
+// $success: bulma.$success !default;
+// $warning: bulma.$warning !default;
+// $danger: bulma.$danger !default;
 
-$light: bulma.$light !default;
-$dark: bulma.$dark !default;
+// $light: bulma.$light !default;
+// $dark: bulma.$dark !default;
 
-// Colors
-$black: bulma.$black !default;
-$black-bis: bulma.$black-bis !default;
-$black-ter: bulma.$black-ter !default;
+// // Colors
+// $black: bulma.$black !default;
+// $black-bis: bulma.$black-bis !default;
+// $black-ter: bulma.$black-ter !default;
 
-$grey-darker: bulma.$grey-darker !default;
-$grey-dark: bulma.$grey-dark !default;
-$grey: bulma.$grey !default;
-$grey-light: bulma.$grey-light !default;
-$grey-lighter: bulma.$grey-lighter !default;
-$grey-lightest: bulma.$grey-lightest !default;
+// $grey-darker: bulma.$grey-darker !default;
+// $grey-dark: bulma.$grey-dark !default;
+// $grey: bulma.$grey !default;
+// $grey-light: bulma.$grey-light !default;
+// $grey-lighter: bulma.$grey-lighter !default;
+// $grey-lightest: bulma.$grey-lightest !default;
 
-$white-ter: bulma.$white-ter !default;
-$white-bis: bulma.$white-bis !default;
-$white: bulma.$white !default;
+// $white-ter: bulma.$white-ter !default;
+// $white-bis: bulma.$white-bis !default;
+// $white: bulma.$white !default;
 
-$orange: bulma.$orange !default;
-$yellow: bulma.$yellow !default;
-$green: bulma.$green !default;
-$turquoise: bulma.$turquoise !default;
-$cyan: bulma.$cyan !default;
-$blue: bulma.$blue !default;
-$purple: bulma.$purple !default;
-$red: bulma.$red !default;
+// $orange: bulma.$orange !default;
+// $yellow: bulma.$yellow !default;
+// $green: bulma.$green !default;
+// $turquoise: bulma.$turquoise !default;
+// $cyan: bulma.$cyan !default;
+// $blue: bulma.$blue !default;
+// $purple: bulma.$purple !default;
+// $red: bulma.$red !default;
 
-// Spacing
-$block-spacing: bulma.$block-spacing !default;
+// // Spacing
+// $block-spacing: bulma.$block-spacing !default;
 
-// Responsiveness
-// The container horizontal gap, which acts as the offset for breakpoints
-$gap: bulma.$gap !default;
-// 960, 1152, and 1344 have been chosen because they are divisible by both 12 and 16
-$tablet: bulma.$tablet !default;
-// 960px container + 4rem
-$desktop: bulma.$desktop !default;
-// 1152px container + 4rem
-$widescreen: bulma.$widescreen !default;
-$widescreen-enabled: bulma.$widescreen-enabled !default;
-// 1344px container + 4rem
-$fullhd: bulma.$fullhd !default;
-$fullhd-enabled: bulma.$fullhd-enabled !default;
-$breakpoints: bulma.$breakpoints !default;
+// // Responsiveness
+// // The container horizontal gap, which acts as the offset for breakpoints
+// $gap: bulma.$gap !default;
+// // 960, 1152, and 1344 have been chosen because they are divisible by both 12 and 16
+// $tablet: bulma.$tablet !default;
+// // 960px container + 4rem
+// $desktop: bulma.$desktop !default;
+// // 1152px container + 4rem
+// $widescreen: bulma.$widescreen !default;
+// $widescreen-enabled: bulma.$widescreen-enabled !default;
+// // 1344px container + 4rem
+// $fullhd: bulma.$fullhd !default;
+// $fullhd-enabled: bulma.$fullhd-enabled !default;
+// $breakpoints: bulma.$breakpoints !default;
 
-// Miscellaneous
+// // Miscellaneous
 
-$easing: bulma.$easing !default;
-$radius-small: bulma.$radius-small !default;
-$radius: bulma.$radius !default;
-$radius-large: bulma.$radius-large !default;
-$radius-rounded: bulma.$radius-rounded !default;
-$speed: bulma.$speed !default;
+// $easing: bulma.$easing !default;
+// $radius-small: bulma.$radius-small !default;
+// $radius: bulma.$radius !default;
+// $radius-large: bulma.$radius-large !default;
+// $radius-rounded: bulma.$radius-rounded !default;
+// $speed: bulma.$speed !default;
 
-// Flags
+// // Flags
 
-$variable-columns: bulma.$variable-columns !default;
-$rtl: bulma.$rtl !default;
+// $variable-columns: bulma.$variable-columns !default;
+// $rtl: bulma.$rtl !default;
 
 
-// Invert colors
-$orange-invert: bulma.findColorInvert($orange) !default;
-$yellow-invert: bulma.findColorInvert($yellow) !default;
-$green-invert: bulma.findColorInvert($green) !default;
-$turquoise-invert: bulma.findColorInvert($turquoise) !default;
-$cyan-invert: bulma.findColorInvert($cyan) !default;
-$blue-invert: bulma.findColorInvert($blue) !default;
-$purple-invert: bulma.findColorInvert($purple) !default;
-$red-invert: bulma.findColorInvert($red) !default;
+// // Invert colors
+// $orange-invert: bulma.findColorInvert($orange) !default;
+// $yellow-invert: bulma.findColorInvert($yellow) !default;
+// $green-invert: bulma.findColorInvert($green) !default;
+// $turquoise-invert: bulma.findColorInvert($turquoise) !default;
+// $cyan-invert: bulma.findColorInvert($cyan) !default;
+// $blue-invert: bulma.findColorInvert($blue) !default;
+// $purple-invert: bulma.findColorInvert($purple) !default;
+// $red-invert: bulma.findColorInvert($red) !default;
 
-$primary-invert: bulma.findColorInvert($primary) !default;
-$primary-light: bulma.findLightColor($primary) !default;
-$primary-dark: bulma.findDarkColor($primary) !default;
-$info-invert: bulma.findColorInvert($info) !default;
-$info-light: bulma.findLightColor($info) !default;
-$info-dark: bulma.findDarkColor($info) !default;
-$success-invert: bulma.findColorInvert($success) !default;
-$success-light: bulma.findLightColor($success) !default;
-$success-dark: bulma.findDarkColor($success) !default;
-$warning-invert: bulma.findColorInvert($warning) !default;
-$warning-light: bulma.findLightColor($warning) !default;
-$warning-dark: bulma.findDarkColor($warning) !default;
-$danger-invert: bulma.findColorInvert($danger) !default;
-$danger-light: bulma.findLightColor($danger) !default;
-$danger-dark: bulma.findDarkColor($danger) !default;
-$light-invert: bulma.findColorInvert($light) !default;
-$dark-invert: bulma.findColorInvert($dark) !default;
+// $primary-invert: bulma.findColorInvert($primary) !default;
+// $primary-light: bulma.findLightColor($primary) !default;
+// $primary-dark: bulma.findDarkColor($primary) !default;
+// $info-invert: bulma.findColorInvert($info) !default;
+// $info-light: bulma.findLightColor($info) !default;
+// $info-dark: bulma.findDarkColor($info) !default;
+// $success-invert: bulma.findColorInvert($success) !default;
+// $success-light: bulma.findLightColor($success) !default;
+// $success-dark: bulma.findDarkColor($success) !default;
+// $warning-invert: bulma.findColorInvert($warning) !default;
+// $warning-light: bulma.findLightColor($warning) !default;
+// $warning-dark: bulma.findDarkColor($warning) !default;
+// $danger-invert: bulma.findColorInvert($danger) !default;
+// $danger-light: bulma.findLightColor($danger) !default;
+// $danger-dark: bulma.findDarkColor($danger) !default;
+// $light-invert: bulma.findColorInvert($light) !default;
+// $dark-invert: bulma.findColorInvert($dark) !default;
 
-// General colors
-$scheme-main: $white !default;
-$scheme-main-bis: $white-bis !default;
-$scheme-main-ter: $white-ter !default;
-$scheme-invert: $black !default;
-$scheme-invert-bis: $black-bis !default;
-$scheme-invert-ter: $black-ter !default;
+// // General colors
+// $scheme-main: $white !default;
+// $scheme-main-bis: $white-bis !default;
+// $scheme-main-ter: $white-ter !default;
+// $scheme-invert: $black !default;
+// $scheme-invert-bis: $black-bis !default;
+// $scheme-invert-ter: $black-ter !default;
 
-$background: $white-ter !default;
+// $background: $white-ter !default;
 
-$border: $grey-lighter !default;
-$border-hover: $grey-light !default;
-$border-light: $grey-lightest !default;
-$border-light-hover: $grey-light !default;
+// $border: $grey-lighter !default;
+// $border-hover: $grey-light !default;
+// $border-light: $grey-lightest !default;
+// $border-light-hover: $grey-light !default;
 
-// Text colors
-$text: $grey-dark !default;
-$text-invert: bulma.findColorInvert($text) !default;
-$text-light: $grey !default;
-$text-strong: $grey-darker !default;
+// // Text colors
+// $text: $grey-dark !default;
+// $text-invert: bulma.findColorInvert($text) !default;
+// $text-light: $grey !default;
+// $text-strong: $grey-darker !default;
 
-// Code colors
-$code: darken($red, 15%) !default;
-$code-background: $background !default;
+// // Code colors
+// $code: darken($red, 15%) !default;
+// $code-background: $background !default;
 
-$pre: $text !default;
-$pre-background: $background !default;
+// $pre: $text !default;
+// $pre-background: $background !default;
 
-// Link colors
-$link: $blue !default;
-$link-invert: bulma.findColorInvert($link) !default;
-$link-light: bulma.findLightColor($link) !default;
-$link-dark: bulma.findDarkColor($link) !default;
-$link-visited: $purple !default;
+// // Link colors
+// $link: $blue !default;
+// $link-invert: bulma.findColorInvert($link) !default;
+// $link-light: bulma.findLightColor($link) !default;
+// $link-dark: bulma.findDarkColor($link) !default;
+// $link-visited: $purple !default;
 
-$link-hover: $grey-darker !default;
-$link-hover-border: $grey-light !default;
+// $link-hover: $grey-darker !default;
+// $link-hover-border: $grey-light !default;
 
-$link-focus: $grey-darker !default;
-$link-focus-border: $blue !default;
+// $link-focus: $grey-darker !default;
+// $link-focus-border: $blue !default;
 
-$link-active: $grey-darker !default;
-$link-active-border: $grey-dark !default;
+// $link-active: $grey-darker !default;
+// $link-active-border: $grey-dark !default;
 
-// Typography
-$family-sans-serif: bulma.$family-sans-serif !default;
-$family-monospace: bulma.$family-monospace !default;
-$render-mode: bulma.$render-mode !default;
+// // Typography
+// $family-sans-serif: bulma.$family-sans-serif !default;
+// $family-monospace: bulma.$family-monospace !default;
+// $render-mode: bulma.$render-mode !default;
 
-$size-1: bulma.$size-1 !default;
-$size-2: bulma.$size-2 !default;
-$size-3: bulma.$size-3 !default;
-$size-4: bulma.$size-4 !default;
-$size-5: bulma.$size-5 !default;
-$size-6: bulma.$size-6 !default;
-$size-7: bulma.$size-7 !default;
+// $size-1: bulma.$size-1 !default;
+// $size-2: bulma.$size-2 !default;
+// $size-3: bulma.$size-3 !default;
+// $size-4: bulma.$size-4 !default;
+// $size-5: bulma.$size-5 !default;
+// $size-6: bulma.$size-6 !default;
+// $size-7: bulma.$size-7 !default;
 
-$weight-light: bulma.$weight-light !default;
-$weight-normal: bulma.$weight-normal !default;
-$weight-medium: bulma.$weight-medium !default;
-$weight-semibold: bulma.$weight-semibold !default;
-$weight-bold: bulma.$weight-bold !default;
+// $weight-light: bulma.$weight-light !default;
+// $weight-normal: bulma.$weight-normal !default;
+// $weight-medium: bulma.$weight-medium !default;
+// $weight-semibold: bulma.$weight-semibold !default;
+// $weight-bold: bulma.$weight-bold !default;
 
-$family-primary: $family-sans-serif !default;
-$family-secondary: $family-sans-serif !default;
-$family-code: $family-monospace !default;
+// $family-primary: $family-sans-serif !default;
+// $family-secondary: $family-sans-serif !default;
+// $family-code: $family-monospace !default;
 
-$size-small: $size-7 !default;
-$size-normal: $size-6 !default;
-$size-medium: $size-5 !default;
-$size-large: $size-4 !default;
+// $size-small: $size-7 !default;
+// $size-normal: $size-6 !default;
+// $size-medium: $size-5 !default;
+// $size-large: $size-4 !default;
 
-// Effects
-$shadow: bulma.$shadow !default;
+// // Effects
+// $shadow: bulma.$shadow !default;
 
-// Lists and maps
-$custom-colors: bulma.$custom-colors !default;
-$custom-shades: bulma.$custom-shades !default;
+// // Lists and maps
+// $custom-colors: bulma.$custom-colors !default;
+// $custom-shades: bulma.$custom-shades !default;
 
-$colors: bulma.mergeColorMaps(("white": ($white, $black), "black": ($black, $white), "light": ($light, $light-invert), "dark": ($dark, $dark-invert), "primary": ($primary, $primary-invert, $primary-light, $primary-dark), "link": ($link, $link-invert, $link-light, $link-dark), "info": ($info, $info-invert, $info-light, $info-dark), "success": ($success, $success-invert, $success-light, $success-dark), "warning": ($warning, $warning-invert, $warning-light, $warning-dark), "danger": ($danger, $danger-invert, $danger-light, $danger-dark)), $custom-colors) !default;
-$shades: bulma.mergeColorMaps(("black-bis": $black-bis, "black-ter": $black-ter, "grey-darker": $grey-darker, "grey-dark": $grey-dark, "grey": $grey, "grey-light": $grey-light, "grey-lighter": $grey-lighter, "white-ter": $white-ter, "white-bis": $white-bis), $custom-shades) !default;
-$sizes: $size-1 $size-2 $size-3 $size-4 $size-5 $size-6 $size-7 !default;
+// $colors: bulma.mergeColorMaps(("white": ($white, $black), "black": ($black, $white), "light": ($light, $light-invert), "dark": ($dark, $dark-invert), "primary": ($primary, $primary-invert, $primary-light, $primary-dark), "link": ($link, $link-invert, $link-light, $link-dark), "info": ($info, $info-invert, $info-light, $info-dark), "success": ($success, $success-invert, $success-light, $success-dark), "warning": ($warning, $warning-invert, $warning-light, $warning-dark), "danger": ($danger, $danger-invert, $danger-light, $danger-dark)), $custom-colors) !default;
+// $shades: bulma.mergeColorMaps(("black-bis": $black-bis, "black-ter": $black-ter, "grey-darker": $grey-darker, "grey-dark": $grey-dark, "grey": $grey, "grey-light": $grey-light, "grey-lighter": $grey-lighter, "white-ter": $white-ter, "white-bis": $white-bis), $custom-shades) !default;
+// $sizes: $size-1 $size-2 $size-3 $size-4 $size-5 $size-6 $size-7 !default;

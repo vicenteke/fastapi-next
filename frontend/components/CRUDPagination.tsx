@@ -1,10 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import Button from './Button';
-import Icon from './Icon';
 import Pagination from './Pagination';
-import { faChevronDown, faCheck } from '@fortawesome/free-solid-svg-icons';
 
 
 interface Props {
@@ -44,6 +41,7 @@ function CRUDPagination({
   setActivePage,
   setPerPage,
 }: Props) {
+  // TODO
   const [perPageInput, setPerPageInput] = useState(String(perPage));
   const [perPageDropdown, setPerPageDropdown] = useState(false);
 
@@ -82,7 +80,7 @@ function CRUDPagination({
         <div className='level-item'>
           <div className={dropdownClasses.join(' ')}>
             <div className="dropdown-trigger">
-              <Button
+              {/* <Button
                 color='normal'
                 variant='rounded'
                 aria-haspopup="true"
@@ -91,7 +89,7 @@ function CRUDPagination({
               >
                 <span>{perPage} per page</span>
                 <Icon icon={faChevronDown}/>
-              </Button>
+              </Button> */}
             </div>
             <div className="dropdown-menu" id={`crud-perpage-${id}`}>
               <div className="dropdown-content px-4 py-4">
@@ -107,14 +105,14 @@ function CRUDPagination({
                     />
                   </div>
                   <div className='control'>
-                    <Button
+                    {/* <Button
                       color='info'
                       variant='rounded'
                       onClick={handleSetPerPage}
                       className="full-height"
                     >
                       <Icon icon={faCheck}/>
-                    </Button>
+                    </Button> */}
                   </div>
                 </div>
               </div>
