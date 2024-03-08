@@ -1,15 +1,16 @@
 import ModalButton from '@/components/ModalButton';
 import Alert from '@/components/Alert';
 import { generateId } from '@/lib/random';
+import TextTest from '@/components/TextTest';
 
 
 export default function Home() {
   const id = generateId();
   return (
     <>
-      <h1 className="title">
+      <TextTest size={2} isSpaced title>
           Hello World
-      </h1>
+      </TextTest>
       <p className="subtitle">
           My first website with <strong>Bulma</strong>!
       </p>

@@ -167,7 +167,7 @@ export interface NavbarProps extends React.ComponentPropsWithoutRef<'nav'> {
 
 
 type InternalWrapperProps = React.PropsWithChildren<{
-  htmlTag?: keyof JSX.IntrinsicElements
+  htmlTag?: keyof JSX.IntrinsicElements | any
   textColor?: BulmaColors | BulmaShades | BulmaColorsLight | BulmaColorsDark | BulmaGreyColors
   backgroundColor?: BulmaColors | BulmaShades | BulmaColorsLight | BulmaColorsDark | BulmaGreyColors
   margin?: BulmaSpacing
